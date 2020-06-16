@@ -2,11 +2,20 @@ const router = require('express').Router()
 const {Sneakers} = require('../db/models')
 module.exports = router
 
+// router.get('/', async (req, res, next) => {
+//   try {
+//     const sneakers = await Sneakers.findAll()
+//     res.json(sneakers)
+//   } catch (err) {
+//     next(err)
+//   }
+// })
+
 router.get('/', async (req, res, next) => {
   try {
     const sneakers = await Sneakers.findAll()
-    console.log(sneakers)
-    res.json(sneakers)
+    const arr = sneakers.slice(0, 12)
+    res.json(arr)
   } catch (err) {
     next(err)
   }
