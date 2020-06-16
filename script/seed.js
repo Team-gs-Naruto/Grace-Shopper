@@ -1,7 +1,26 @@
 'use strict'
-const {sneakerSeed} = require('../seed')
+const sneakerSeed = require('../seedSneakers')
 const db = require('../server/db')
-const {User} = require('../server/db/models')
+const {User, Sneakers} = require('../server/db/models')
+
+const createSeedData = () => {
+  const defaultMedia =
+    'https://lh3.googleusercontent.com/proxy/wMwMbg3tpWQoGnDDzyq5l09onQRZg-Az_0PrQ5Y6DCWZ5H0Mb8lIdd37WLzlWIhsJVIMAfdLC1Vq4-uwuwb4NXN6MQ_gBRwtSVgpSyac4NxQpr6f2ld5Dnhwqz1FES6Ns4PNmmzae4LmwQttF1o-wHZ5Gg'
+  return sneakerSeed.map(sneaker => {
+    return {
+      brand: sneaker.brand,
+      colorway: sneaker.colorway,
+      media: sneaker.media.imageUrl.length
+        ? sneaker.media.imageUrl
+        : defaultMedia,
+      releaseDate: sneaker.releaseDate,
+      retailPrice: sneaker.retailPrice,
+      styleId: sneaker.styleId,
+      title: sneaker.title,
+      year: sneaker.year
+    }
+  })
+}
 
 async function seed() {
   await db.sync({force: true})
@@ -11,6 +30,11 @@ async function seed() {
     User.create({email: 'cody@email.com', password: '123'}),
     User.create({email: 'murphy@email.com', password: '123'})
   ])
+
+  // console.log('hererer', sneakerSeed)
+  const sneakers = await Promise.all(
+    createSeedData().map(sneaker => Sneakers.create(sneaker))
+  )
 
   console.log(`seeded ${users.length} users`)
   console.log(`seeded successfully`)

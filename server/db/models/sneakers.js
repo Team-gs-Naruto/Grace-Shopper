@@ -2,11 +2,6 @@ const Sequelize = require('sequelize')
 const db = require('../db')
 
 const Sneakers = db.define('sneakers', {
-  id: {
-    type: Sequelize.STRING,
-    allowNull: false,
-    primaryKey: true
-  },
   brand: {
     type: Sequelize.STRING,
     allowNull: false
@@ -14,6 +9,12 @@ const Sneakers = db.define('sneakers', {
   colorway: {
     type: Sequelize.STRING,
     allowNull: false
+  },
+  media: {
+    type: Sequelize.STRING,
+    allowNull: true,
+    defaultValue:
+      'https://lh3.googleusercontent.com/proxy/wMwMbg3tpWQoGnDDzyq5l09onQRZg-Az_0PrQ5Y6DCWZ5H0Mb8lIdd37WLzlWIhsJVIMAfdLC1Vq4-uwuwb4NXN6MQ_gBRwtSVgpSyac4NxQpr6f2ld5Dnhwqz1FES6Ns4PNmmzae4LmwQttF1o-wHZ5Gg'
   },
   // media: {
   //   imageUrl: {
@@ -38,11 +39,11 @@ const Sneakers = db.define('sneakers', {
   },
   retailPrice: {
     type: Sequelize.INTEGER,
-    allowNull: false
+    allowNull: true
   },
   styleId: {
     type: Sequelize.STRING,
-    allowNull: false
+    allowNull: true
   },
   title: {
     type: Sequelize.STRING,
@@ -50,7 +51,7 @@ const Sneakers = db.define('sneakers', {
   },
   year: {
     type: Sequelize.INTEGER,
-    allowNull: false
+    allowNull: true
   }
 })
 
