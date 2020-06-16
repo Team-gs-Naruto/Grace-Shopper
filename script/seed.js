@@ -1,5 +1,5 @@
 'use strict'
-
+const {sneakerSeed} = require('../seed')
 const db = require('../server/db')
 const {User} = require('../server/db/models')
 
