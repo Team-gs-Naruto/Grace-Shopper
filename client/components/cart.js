@@ -4,41 +4,35 @@ import {connect} from 'react-redux'
 
 export class Cart extends React.Component {
   render() {
-    // const { cart, removeSneakerFromCart } = this.props
+    const {cart, removeSneakerFromCart} = this.props
+
     return (
-      //   <div>
-      //     {cart.length === 0 ? (
-      //       <div>
-      //         Empty Cart
-      //       </div>
+      <div>
+        {cart ? (
+          cart.map(sneaker => (
+            <div key={sneaker.id}>
+              <div>
+                <button
+                  type="button"
+                  onClick={() => removeSneakerFromCart(sneaker.id)}
+                />
+              </div>
 
-      //     ) : (
-      //         cart.map(sneaker => (
-      //           <div key={sneaker.id}>
-      //             <div>
-      //               <button type='button'
-      //                 onClick={() => removeSneakerFromCart(sneaker.id)}>
+              <div>
+                <image src={sneaker.media} />
+              </div>
 
-      //               </button>
-      //             </div>
+              <div>{sneaker.title}</div>
 
-      //             <div>
-      //               <image src={sneaker.media} />
-      //             </div>
-
-      //             <div>
-      //               {sneaker.title}
-      //             </div>
-
-      //             <div>
-      //               {sneaker.retailPrice}
-
-      //             </div>
-      //           </div>
-      //         ))
-      //       )}
-      //   </div>
-      <div>Hello</div>
+              <div>{sneaker.retailPrice}</div>
+            </div>
+          ))
+        ) : (
+          <div>
+            <h3>Your cart is empty</h3>
+          </div>
+        )}
+      </div>
     )
   }
 }
