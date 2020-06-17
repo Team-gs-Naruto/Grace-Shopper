@@ -2,10 +2,15 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {fetchSingleSneaker} from '../store/single-sneaker'
+import {cartSneaker} from '../store/cart'
 
 export class SingleSneaker extends React.Component {
   componentDidMount() {
     this.props.fetchSingleSneaker(this.props.match.params.id)
+  }
+
+  handleClick = id => {
+    this.props.addToCart(id)
   }
 
   render() {
@@ -23,7 +28,14 @@ export class SingleSneaker extends React.Component {
         <div>Release Date: {sneaker.releaseDate}</div>
         <div>Style ID: {sneaker.styleId}</div>
 
-        <button type="button">Add to Cart</button>
+        <button
+          type="button"
+          onClick={() => {
+            this.handleClick(sneaker.id)
+          }}
+        >
+          Add to Cart
+        </button>
       </div>
     )
   }
@@ -34,7 +46,8 @@ const mapState = state => ({
 })
 
 const mapDispatch = dispatch => ({
-  fetchSingleSneaker: id => dispatch(fetchSingleSneaker(id))
+  fetchSingleSneaker: id => dispatch(fetchSingleSneaker(id)),
+  addToCart: id => dispatch(cartSneaker(id))
 })
 
 export default connect(mapState, mapDispatch)(SingleSneaker)
