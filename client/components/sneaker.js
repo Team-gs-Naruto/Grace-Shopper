@@ -1,13 +1,16 @@
 import React from 'react'
+import Card from 'react-bootstrap/Card'
 
 const ShopPageSneaker = props => {
   const {sneaker} = props
   return (
-    <div>
-      <div>Title: {sneaker.title}</div>
-      <img src={sneaker.media} />
-      <div>Price: {sneaker.retailPrice}</div>
-    </div>
+    <Card style={{width: '18rem'}}>
+      <Card.Img variant="top" src={sneaker.media} />
+      <Card.Body>
+        <Card.Title>Title: {sneaker.title}</Card.Title>
+        <Card.Text>Price: {sneaker.retailPrice}</Card.Text>
+      </Card.Body>
+    </Card>
   )
 }
 

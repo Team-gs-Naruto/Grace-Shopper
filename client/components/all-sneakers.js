@@ -14,7 +14,10 @@ export class AllSneakers extends React.Component {
 
     return (
       <div>
-        <h1>All Sneakers</h1>
+        <div className="text-center">
+          <h1>All Sneakers</h1>
+        </div>
+
         {sneakers.map(sneaker => (
           <div key={sneaker.id}>
             <Link to={`/shop/${sneaker.id}`}>
