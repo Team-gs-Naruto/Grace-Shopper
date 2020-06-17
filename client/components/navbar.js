@@ -6,7 +6,7 @@ import {logout} from '../store'
 import Navbar from 'react-bootstrap/Navbar'
 const NavBar = ({handleClick, isLoggedIn}) => (
   <div>
-    <Navbar fixed="sticky" bg="dark" variant="dark">
+    <Navbar fixed="fixed" bg="dark" variant="dark">
       <Navbar.Brand href="/home">
         <img
           alt=""
