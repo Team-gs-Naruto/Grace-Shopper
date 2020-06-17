@@ -5,13 +5,16 @@ const {User, Sneakers} = require('../server/db/models')
 
 const createSeedData = () => {
   const defaultMedia =
-    'https://lh3.googleusercontent.com/proxy/wMwMbg3tpWQoGnDDzyq5l09onQRZg-Az_0PrQ5Y6DCWZ5H0Mb8lIdd37WLzlWIhsJVIMAfdLC1Vq4-uwuwb4NXN6MQ_gBRwtSVgpSyac4NxQpr6f2ld5Dnhwqz1FES6Ns4PNmmzae4LmwQttF1o-wHZ5Gg'
+    'https://cdn5.vectorstock.com/i/thumb-large/53/94/running-shoe-sneaker-silhouette-vector-2575394.jpg'
   return sneakerSeed.map(sneaker => {
     return {
       brand: sneaker.brand,
       colorway: sneaker.colorway,
-      media: sneaker.media.imageUrl.length
-        ? sneaker.media.imageUrl
+      media: sneaker.media.thumbUrl.length
+        ? sneaker.media.thumbUrl
+        : defaultMedia,
+      imageUrl: sneaker.media.smallImageUrl.length
+        ? sneaker.media.smallImageUrl
         : defaultMedia,
       releaseDate: sneaker.releaseDate,
       retailPrice: sneaker.retailPrice,
