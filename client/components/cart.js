@@ -38,7 +38,7 @@ export class Cart extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  cart: state
+  cart: state.cart
 })
 
 const mapDispatchToProps = dispatch => ({
