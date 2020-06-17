@@ -9,4 +9,4 @@ export {Login, Signup} from './auth-form'
 export {default as AllSneakers} from './all-sneakers'
 export {default as SingleSneaker} from './single-sneaker'
 export {Cart} from './cart'
-
+export {default as HomePage} from './home-page'
