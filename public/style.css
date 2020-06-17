@@ -11,6 +11,7 @@ label {
 }
 
 nav a {
+  align-items: center;
   display: inline-block;
   margin: 1em;
 }
