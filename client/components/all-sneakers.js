@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import ShopPageSneaker from './Sneaker'
 import {Link} from 'react-router-dom'
 import {fetchSneakers} from '../store/all-sneakers'
+import {Container, Row, Col} from 'react-bootstrap'
 
 export class AllSneakers extends React.Component {
   componentDidMount() {
@@ -17,14 +18,19 @@ export class AllSneakers extends React.Component {
         <div className="text-center">
           <h1>All Sneakers</h1>
         </div>
-
-        {sneakers.map(sneaker => (
-          <div key={sneaker.id}>
-            <Link to={`/shop/${sneaker.id}`}>
-              <ShopPageSneaker sneaker={sneaker} />
-            </Link>
-          </div>
-        ))}
+        <Container>
+          <Row>
+            {sneakers.map(sneaker => (
+              <div key={sneaker.id}>
+                <Col>
+                  <Link to={`/shop/${sneaker.id}`}>
+                    <ShopPageSneaker sneaker={sneaker} />
+                  </Link>
+                </Col>
+              </div>
+            ))}
+          </Row>
+        </Container>
       </div>
     )
   }
