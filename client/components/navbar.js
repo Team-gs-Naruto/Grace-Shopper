@@ -7,7 +7,7 @@ import Navbar from 'react-bootstrap/Navbar'
 const NavBar = ({handleClick, isLoggedIn}) => (
   <div>
     <Navbar fixed="fixed" bg="dark" variant="dark">
-      <Navbar.Brand href="/home">
+      <Navbar.Brand href="/homepage">
         <img
           alt=""
           src="https://media.giphy.com/media/dsQ0bGwVVi0aPkKo9J/giphy.gif"
@@ -21,7 +21,7 @@ const NavBar = ({handleClick, isLoggedIn}) => (
       {isLoggedIn ? (
         <div>
           {/* The navbar will show these links after you log in */}
-          <Link to="/home">Home</Link>
+          <Link to="/homepage">Home</Link>
           &nbsp; &nbsp; &nbsp; &nbsp;
           <a href="#" onClick={handleClick}>
             Logout
@@ -35,6 +35,8 @@ const NavBar = ({handleClick, isLoggedIn}) => (
       ) : (
         <div>
           {/* The navbar will show these links before you log in */}
+          <Link to="/homepage">Home</Link>
+          &nbsp; &nbsp; &nbsp; &nbsp;
           <Link to="/login">Login</Link>
           &nbsp; &nbsp; &nbsp; &nbsp;
           <Link to="/signup">Sign Up</Link>
