@@ -7,7 +7,7 @@ import Navbar from 'react-bootstrap/Navbar'
 const NavBar = ({handleClick, isLoggedIn}) => (
   <div>
     <Navbar fixed="fixed" bg="dark" variant="dark">
-      <Navbar.Brand href="/home">
+      <Navbar.Brand href="/homepage">
         <img
           alt=""
           src="https://media.giphy.com/media/dsQ0bGwVVi0aPkKo9J/giphy.gif"
