@@ -29,7 +29,7 @@ export class Cart extends React.Component {
           ))
         ) : (
           <div>
-            <h3>Your cart is empty</h3>
+            <h3 className="center">Your cart is empty</h3>
           </div>
         )}
       </div>
