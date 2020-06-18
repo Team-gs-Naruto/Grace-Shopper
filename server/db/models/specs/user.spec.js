@@ -27,6 +27,13 @@ describe('User model', () => {
       it('returns false if the password is incorrect', () => {
         expect(cody.correctPassword('bonez')).to.be.equal(false)
       })
+
+      it('can check if an user is an admin', async () => {
+        const admin = await User.create({email: 'bb@yahoo.com', isAdmin: true})
+        const notAdmin = await User.create({email: 'mmp@hotmail.com'})
+        expect(admin.isAdmin).to.be.equal(true)
+        expect(notAdmin.isAdmin).to.be.equal(false)
+      })
     }) // end describe('correctPassword')
   }) // end describe('instanceMethods')
 }) // end describe('User model')
