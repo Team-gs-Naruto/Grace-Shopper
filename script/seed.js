@@ -1,12 +1,32 @@
 'use strict'
-const sneakerSeed = require('../seedSneakers')
 const db = require('../server/db')
 const {User, Sneakers} = require('../server/db/models')
+const Axios = require('axios')
+
+let allSneakers = []
+
+const getSneakersFromSwagger = async () => {
+  const nikeSneakers = await Axios.get(
+    `http://api.thesneakerdatabase.com/v1/sneakers?limit=34&brand=Nike`
+  )
+  const adidasSneakers = await Axios.get(
+    `http://api.thesneakerdatabase.com/v1/sneakers?limit=33&brand=Adidas`
+  )
+  const pumaSneakers = await Axios.get(
+    `http://api.thesneakerdatabase.com/v1/sneakers?limit=33&brand=Puma`
+  )
+
+  allSneakers = allSneakers.concat(
+    nikeSneakers.data.results,
+    adidasSneakers.data.results,
+    pumaSneakers.data.results
+  )
+}
 
 const createSeedData = () => {
   const defaultMedia =
     'https://cdn5.vectorstock.com/i/thumb-large/53/94/running-shoe-sneaker-silhouette-vector-2575394.jpg'
-  return sneakerSeed.map(sneaker => {
+  return allSneakers.map(sneaker => {
     return {
       brand: sneaker.brand,
       colorway: sneaker.colorway,
@@ -34,12 +54,12 @@ async function seed() {
     User.create({email: 'murphy@email.com', password: '123'})
   ])
 
-  // console.log('hererer', sneakerSeed)
   const sneakers = await Promise.all(
     createSeedData().map(sneaker => Sneakers.create(sneaker))
   )
 
   console.log(`seeded ${users.length} users`)
+  console.log(`seeded ${sneakers.length} sneakers`)
   console.log(`seeded successfully`)
 }
 
@@ -49,6 +69,7 @@ async function seed() {
 async function runSeed() {
   console.log('seeding...')
   try {
+    await getSneakersFromSwagger()
     await seed()
   } catch (err) {
     console.error(err)
