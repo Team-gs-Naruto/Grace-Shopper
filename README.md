@@ -1,4 +1,5 @@
 SNEAKER SHOPPER
+
 by Soham Dutta, Alex Bangiyev, Charlies Pan, Chislaine Cruz
 
 to begin, clone this to your repo
