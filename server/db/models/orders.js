@@ -7,7 +7,9 @@ const Order = db.define('order', {
     defaultValue: false
   },
   totalPrice: {
-    type: Sequilize.INTEGER
+    type: Sequelize.INTEGER,
+    allowNull: false,
+    defaultValue: 0
   }
 })
 

@@ -18,7 +18,7 @@ const Purchase = require('./purchase')
  */
 
 User.hasMany(Order)
-Order.belongsTo(User, {foreignKey: userId})
+Order.belongsTo(User)
 
 Order.belongsToMany(Sneakers, {through: Purchase})
 Sneakers.belongsToMany(Order, {through: Purchase})
