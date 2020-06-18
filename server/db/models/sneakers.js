@@ -8,7 +8,7 @@ const Sneakers = db.define('sneakers', {
   },
   colorway: {
     type: Sequelize.STRING,
-    allowNull: false
+    allowNull: true
   },
   media: {
     type: Sequelize.STRING,
