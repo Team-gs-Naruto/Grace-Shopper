@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import ShopPageSneaker from './Sneaker'
+import ShopPageSneaker from './sneaker'
 import {Link} from 'react-router-dom'
 import {fetchSneakers} from '../store/all-sneakers'
 
