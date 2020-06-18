@@ -3,13 +3,23 @@ import {removeSneakerFromCart} from '../store/cart'
 import {connect} from 'react-redux'
 
 export class Cart extends React.Component {
+  constructor() {
+    super()
+    this.state = {
+      items: []
+    }
+  }
+  componentDidMount() {
+    // this.props.match.params.id
+  }
   render() {
-    const {cart, removeSneakerFromCart} = this.props
+    const items = this.state.items
+    console.log('props is: ', this.props)
 
     return (
       <div>
-        {cart ? (
-          cart.map(sneaker => (
+        {items ? (
+          items.map(sneaker => (
             <div key={sneaker.id}>
               <div>
                 <button
