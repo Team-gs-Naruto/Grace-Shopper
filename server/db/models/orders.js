@@ -5,6 +5,9 @@ const Order = db.define('order', {
   isComplete: {
     type: Sequelize.BOOLEAN,
     defaultValue: false
+  },
+  totalPrice: {
+    type: Sequilize.INTEGER
   }
 })
 
