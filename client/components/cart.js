@@ -1,6 +1,7 @@
 import React from 'react'
 import {removeSneakerFromCart} from '../store/cart'
 import {connect} from 'react-redux'
+import {savingOrder} from '../store/cart'
 
 export class Cart extends React.Component {
   constructor() {
@@ -10,7 +11,10 @@ export class Cart extends React.Component {
     }
   }
   componentDidMount() {
-    // this.props.match.params.id
+    this.props.savingOrder(this.props.match.params.id)
+    this.setState({
+      items: this.props.cart.items
+    })
   }
   render() {
     const items = this.state.items
@@ -52,7 +56,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  removeSneakerFromCart: id => dispatch(removeSneakerFromCart(id))
+  removeSneakerFromCart: id => dispatch(removeSneakerFromCart(id)),
+  savingOrder: id => dispatch(savingOrder(id))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cart)

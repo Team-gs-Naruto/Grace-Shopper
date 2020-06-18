@@ -6,7 +6,7 @@ const ADD_SNEAKER_TO_CART = 'ADD_SNEAKER_TO_CART'
 
 const REMOVE_SNEAKER_FROM_CART = 'REMOVE_SNEAKER_FROM_CART'
 
-const SAVE_CART = 'SAVE_CART'
+const SAVE_ORDER = 'SAVE_ORDER'
 
 // ACTION CREATORS
 const addSneakerToCart = item => ({
@@ -19,9 +19,9 @@ export const removeSneakerFromCart = id => ({
   id
 })
 
-export const saveCart = cart => ({
-  type: SAVE_CART,
-  cart
+export const saveOrder = order => ({
+  type: SAVE_ORDER,
+  order
 })
 
 // THUNK CREATORS
@@ -36,15 +36,15 @@ export const cartSneaker = id => {
   }
 }
 
-export const savingCart = userId => {
+export const savingOrder = userId => {
   return async dispatch => {
     try {
       const user = await axios.get(`/api/user/${userId}`)
 
-      // const order = await order.create
-      // user.addOrder(order)
+      const order = await Order.create()
+      user.addOrder(order)
 
-      // dispatch(saveCart(order))
+      dispatch(saveOrder(order))
     } catch (err) {
       console.log(err)
     }
@@ -54,7 +54,8 @@ export const savingCart = userId => {
 //REDUCER
 const initialState = {
   items: [],
-  total: 0
+  total: 0,
+  orderId: 0
 }
 
 export default function cartReducer(state = initialState, action) {
@@ -74,6 +75,8 @@ export default function cartReducer(state = initialState, action) {
         ...state,
         items: state.items.filter(sneaker => sneaker.id !== action.id)
       }
+    case SAVE_ORDER:
+      return {...state, orderId: action.order.id}
     default:
       return state
   }
