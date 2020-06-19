@@ -14,7 +14,7 @@ export class Cart extends React.Component {
       <div>
         {cart && cart.sneakers ? (
           cart.sneakers.map(sneaker => (
-            <div key={sneaker.sneakerId}>
+            <div key={sneaker.id}>
               <div>
                 <button
                   type="button"
