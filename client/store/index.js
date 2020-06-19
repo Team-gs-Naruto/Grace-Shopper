@@ -7,14 +7,12 @@ import cartReducer from './cart'
 import sneakerReducer from './all-sneakers'
 import singleSneakerReducer from './single-sneaker'
 
-
-const reducer = combineReducers({
+export const reducer = combineReducers({
   user,
   allSneakers: sneakerReducer,
   singleSneaker: singleSneakerReducer,
   cart: cartReducer
 })
-
 
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))

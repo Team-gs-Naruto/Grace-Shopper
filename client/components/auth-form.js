@@ -28,7 +28,7 @@ const AuthForm = props => {
             name="password"
           />
         </Form.Group>
-        <Form.Group controlId="formBasicCheckbox">
+        <Form.Group>
           <Form.Check type="checkbox" label="Remember me" />
         </Form.Group>
         <Button variant="primary" type="submit">
