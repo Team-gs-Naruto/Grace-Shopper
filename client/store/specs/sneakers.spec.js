@@ -71,4 +71,14 @@ describe('Sneakers thunks', () => {
       ])
     })
   })
+  describe('GET /sneakers/:id', () => {
+    beforeEach(() => {
+      mockAxios.onGet('/api/sneakers/1').reply(200, [{id: 1, brand: 'Nike'}])
+    })
+    it('sets a single sneaker to the state', async () => {
+      await store.dispatch(fetchSingleSneaker(1))
+      const state = store.getState()
+      expect(state.singleSneaker).to.deep.equal([{id: 1, brand: 'Nike'}])
+    })
+  })
 })
