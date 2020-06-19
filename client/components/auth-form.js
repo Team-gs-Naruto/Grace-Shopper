@@ -13,14 +13,14 @@ const AuthForm = props => {
   return (
     <Container fluid="sm">
       <Form onSubmit={handleSubmit} name={name}>
-        <Form.Group controlId="formBasicEmail">
+        <Form.Group>
           <Form.Label htmlFor="email">Email address</Form.Label>
           <Form.Control type="email" placeholder="Enter email" name="email" />
           <Form.Text className="text-muted">
             We'll never share your email with anyone else.
           </Form.Text>
         </Form.Group>
-        <Form.Group controlId="formBasicPassword">
+        <Form.Group>
           <Form.Label htmlFor="password">Password</Form.Label>
           <Form.Control
             type="password"
@@ -28,7 +28,7 @@ const AuthForm = props => {
             name="password"
           />
         </Form.Group>
-        <Form.Group controlId="formBasicCheckbox">
+        <Form.Group>
           <Form.Check type="checkbox" label="Remember me" />
         </Form.Group>
         <Button variant="primary" type="submit">

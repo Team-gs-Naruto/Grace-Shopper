@@ -4,7 +4,8 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {logout} from '../store'
 import Navbar from 'react-bootstrap/Navbar'
-const NavBar = ({handleClick, isLoggedIn}) => (
+
+const NavBar = ({handleClick, isLoggedIn, user}) => (
   <div>
     <Navbar fixed="fixed" bg="dark" variant="dark">
       <Navbar.Brand href="/homepage">
@@ -30,7 +31,7 @@ const NavBar = ({handleClick, isLoggedIn}) => (
           <Link to="/shop">Products</Link>
           &nbsp; &nbsp; &nbsp; &nbsp;
           {/* MAKE SURE TO USE THE USER ID ROUTE PATH IF THEY ARE LOGGED IN */}
-          <Link to="/cart">Cart</Link>
+          <Link to={`/${user.id}/cart`}>Cart</Link>
           &nbsp; &nbsp; &nbsp; &nbsp;
         </div>
       ) : (
@@ -58,7 +59,10 @@ const NavBar = ({handleClick, isLoggedIn}) => (
  */
 const mapState = state => {
   return {
-    isLoggedIn: !!state.user.id
+    isLoggedIn: !!state.user.id,
+    user: state.user,
+    cart: state.cart,
+    userId: state.user.id
   }
 }
 

@@ -2,6 +2,7 @@
 const db = require('../server/db')
 const {User, Sneakers} = require('../server/db/models')
 const Axios = require('axios')
+const chance = require('chance')(123)
 
 let allSneakers = []
 
@@ -45,14 +46,45 @@ const createSeedData = () => {
   })
 }
 
+const numUsers = 35
+
+const emails = chance.unique(chance.email, numUsers)
+
+function doTimes(n, fn) {
+  const results = []
+  while (n--) {
+    results.push(fn())
+  }
+  return results
+}
+
+function newUser() {
+  return User.build({
+    email: emails.pop(),
+    password: chance.word(),
+    isAdmin: chance.weighted([true, false], [5, 95])
+  })
+}
+
+function generateUsers() {
+  const users = doTimes(numUsers, newUser)
+  return users
+}
+
+const createUsers = async () => {
+  return generateUsers().map(user => user.save())
+}
+
 async function seed() {
   await db.sync({force: true})
   console.log('db synced!')
 
-  const users = await Promise.all([
-    User.create({email: 'cody@email.com', password: '123'}),
-    User.create({email: 'murphy@email.com', password: '123'})
-  ])
+  // const users = await Promise.all([
+  //   User.create({email: 'cody@email.com', password: '123'}),
+  //   User.create({email: 'murphy@email.com', password: '123'})
+  // ])
+
+  const users = await createUsers()
 
   const sneakers = await Promise.all(
     createSeedData().map(sneaker => Sneakers.create(sneaker))
