@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {User} = require('../db/models')
+const {User, Order, Purchase} = require('../db/models')
 module.exports = router
 
 router.get('/', async (req, res, next) => {
@@ -11,6 +11,54 @@ router.get('/', async (req, res, next) => {
       attributes: ['id', 'email']
     })
     res.json(users)
+  } catch (err) {
+    next(err)
+  }
+})
+
+router.get('/:userId/cart', async (req, res, next) => {
+  try {
+    const order = await Order.findOne({
+      where: {
+        userId: +req.params.userId,
+        isComplete: false
+      },
+      include: {all: true, nested: true}
+    })
+
+    res.json(order)
+  } catch (err) {
+    next(err)
+  }
+})
+
+router.post('/:userId/cart', async (req, res, next) => {
+  try {
+    const order = await Order.findOrCreate({
+      where: {
+        userId: +req.params.userId,
+        isComplete: false
+      }
+    }).spread(foundOrCreatedOrder => {
+      return Purchase.findOrCreate({
+        where: {
+          quantity: 1,
+          orderId: +foundOrCreatedOrder.id,
+          sneakerId: +req.body.sneakerId,
+          priceAtPurchase: +req.body.sneakerPrice
+        }
+      })
+    })
+
+    const findOrder = await Order.findOne({
+      where: {
+        userId: +req.params.userId,
+        isComplete: false
+      },
+      include: {all: true, nested: true}
+    })
+
+    res.json(findOrder)
   } catch (err) {
     next(err)
   }

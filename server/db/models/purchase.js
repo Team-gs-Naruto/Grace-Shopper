@@ -5,7 +5,7 @@ const Sneakers = require('./sneakers')
 const Purchase = db.define('purchase', {
   priceAtPurchase: {
     type: Sequelize.INTEGER,
-    allowNull: false,
+    allowNull: true,
     validate: {
       notEmpty: true
     }
