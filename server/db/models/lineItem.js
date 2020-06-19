@@ -1,8 +1,7 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
-const Sneakers = require('./sneakers')
 
-const Purchase = db.define('purchase', {
+const LineItem = db.define('lineitem', {
   priceAtPurchase: {
     type: Sequelize.INTEGER,
     allowNull: true,
@@ -16,4 +15,4 @@ const Purchase = db.define('purchase', {
   }
 })
 
-module.exports = Purchase
+module.exports = LineItem
