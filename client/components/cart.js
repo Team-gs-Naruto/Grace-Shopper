@@ -1,6 +1,7 @@
 import React from 'react'
 import {removeSneakerFromCart, getCartThunk} from '../store/cart'
 import {connect} from 'react-redux'
+import Button from 'react-bootstrap/Button'
 
 export class Cart extends React.Component {
   componentDidMount() {
@@ -16,10 +17,13 @@ export class Cart extends React.Component {
           cart.sneakers.map(sneaker => (
             <div key={sneaker.id}>
               <div>
-                <button
+                <Button
                   type="button"
+                  variant="danger"
                   onClick={() => removeSneaker(sneaker.id)}
-                />
+                >
+                  Remove
+                </Button>
               </div>
 
               <div>
