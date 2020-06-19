@@ -29,6 +29,7 @@ const NavBar = ({handleClick, isLoggedIn}) => (
           &nbsp; &nbsp; &nbsp; &nbsp;
           <Link to="/shop">Products</Link>
           &nbsp; &nbsp; &nbsp; &nbsp;
+          {/* MAKE SURE TO USE THE USER ID ROUTE PATH IF THEY ARE LOGGED IN */}
           <Link to="/cart">Cart</Link>
           &nbsp; &nbsp; &nbsp; &nbsp;
         </div>
