@@ -31,7 +31,7 @@ const NavBar = ({handleClick, isLoggedIn, user}) => (
           <Link to="/shop">Products</Link>
           &nbsp; &nbsp; &nbsp; &nbsp;
           {/* MAKE SURE TO USE THE USER ID ROUTE PATH IF THEY ARE LOGGED IN */}
-          <Link to={`/${user.id}/cart`}>Cart</Link>
+          <Link to="/cart">Cart</Link>
           &nbsp; &nbsp; &nbsp; &nbsp;
         </div>
       ) : (

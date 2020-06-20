@@ -1,20 +1,22 @@
 import React from 'react'
-import {removeSneakerFromCart, getCartThunk} from '../store/cart'
+import {removeFromCart, fetchCartFromStorage} from '../store/cart'
 import {connect} from 'react-redux'
 import Button from 'react-bootstrap/Button'
 
 export class Cart extends React.Component {
-  componentDidMount() {
-    this.props.getCart(this.props.match.params.userId)
+  constructor() {
+    super()
+    this.state = {}
   }
-
+  componentDidMount() {
+    this.props.fetchCartFromStorage()
+  }
   render() {
-    const {cart, removeSneaker} = this.props
-
+    let sneakers = this.props.userCart
     return (
       <div>
-        {cart && cart.sneakers ? (
-          cart.sneakers.map(sneaker => (
+        {sneakers ? (
+          sneakers.map(sneaker => (
             <div key={sneaker.id}>
               <div>
                 <Button
@@ -46,12 +48,11 @@ export class Cart extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  cart: state.cart
+  userCart: state.cartReducer.userCart
 })
 
 const mapDispatchToProps = dispatch => ({
-  removeSneaker: id => dispatch(removeSneakerFromCart(id)),
-  getCart: id => dispatch(getCartThunk(id))
+  fetchCartFromStorage: () => dispatch(fetchCartFromStorage())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cart)
