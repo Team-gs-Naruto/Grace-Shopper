@@ -1,15 +1,8 @@
 const router = require('express').Router()
 const {Sneakers} = require('../db/models')
-module.exports = router
+const checkAuth = require('./permissions.middleware')
 
-// router.get('/', async (req, res, next) => {
-//   try {
-//     const sneakers = await Sneakers.findAll()
-//     res.json(sneakers)
-//   } catch (err) {
-//     next(err)
-//   }
-// })
+module.exports = router
 
 router.get('/', async (req, res, next) => {
   try {
@@ -29,3 +22,29 @@ router.get('/:id', async (req, res, next) => {
     next(error)
   }
 })
+
+router.put(
+  '/',
+  checkAuth.notAGuest,
+  checkAuth.isAdmin,
+  async (req, res, next) => {
+    try {
+      //api to create new sneaker, only accessible to admins
+    } catch (err) {
+      next(err)
+    }
+  }
+)
+
+router.delete(
+  '/:id',
+  checkAuth.notAGuest,
+  checkAuth.isAdmin,
+  async (req, res, next) => {
+    try {
+      //api to create new sneaker, only accessible to admins
+    } catch (err) {
+      next(err)
+    }
+  }
+)
