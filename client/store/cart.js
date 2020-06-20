@@ -57,7 +57,7 @@ export default function cartReducer(state = initialState, action) {
     case ADD_SNEAKER_TO_CART:
       return action.item
     case REMOVE_SNEAKER_FROM_CART:
-      return state.filter(sneaker => sneaker !== action.id)
+      return state.sneaker.filter(sneaker => sneaker.id !== action.id)
     case GET_CART:
       return action.cart
     default:
