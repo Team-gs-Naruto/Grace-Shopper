@@ -64,7 +64,8 @@ export default function cartReducer(state = initialState, action) {
         userCart: [...state.userCart, {item: action.item}]
       }
       //send state to local storage
-      localStorage.setItem('cart', JSON.stringify(newState.cartItems))
+      localStorage.setItem('shoppingCart', JSON.stringify(newState.userCart))
+      console.log(newState)
       return newState
 
     // REMOVE FROM CART REDUCER
