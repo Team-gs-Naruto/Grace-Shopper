@@ -4,12 +4,22 @@ import Card from 'react-bootstrap/Card'
 const User = props => {
   const {user} = props
   return (
-    <Card style={{width: '18rem'}}>
-      <Card.Body>
-        <Card.Title>Email: {user.email}</Card.Title>
-        <Card.Text>Administrator?: {user.isAdmin}</Card.Text>
-      </Card.Body>
-    </Card>
+    <div>
+      <Card style={{width: '18rem'}}>
+        <p>{user.email}</p>
+        <p>
+          {user.isAdmin ? (
+            <button type="button" onClick={console.log('Clicked')}>
+              Remove Admin
+            </button>
+          ) : (
+            <button type="button" onClick={console.log('Clicked')}>
+              Make Admin
+            </button>
+          )}
+        </p>
+      </Card>
+    </div>
   )
 }
 
