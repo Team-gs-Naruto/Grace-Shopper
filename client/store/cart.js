@@ -66,11 +66,26 @@ export const getCartThunk = userId => {
   return async dispatch => {
     try {
       if (!localStorage.getItem('cart')) {
+        // If I am a guest and there are no items in localstorage cart
         localStorage.setItem('cart', JSON.stringify([]))
       } else if (!userId) {
+        // If I am a guest and i have items in localstorage cart
         dispatch(getCart(JSON.parse(localStorage.getItem('cart'))))
       } else {
+        //  If I am a user and I have iems in localstorage cart
+        let cartArr = JSON.parse(localStorage.getItem('cart'))
+
+        await Promise.all(
+          cartArr.map(item => {
+            return axios.post(`/api/users/${userId}/cart`, {
+              sneakerId: item.id,
+              sneakerPrice: item.retailPrice
+            })
+          })
+        )
+
         // need to send localstorage cart back to user in this condition to merge the cart in the backend and create instance for it
+
         const {data} = await axios.get(`/api/users/${userId}/cart`)
         dispatch(getCart(data.sneakers))
       }
