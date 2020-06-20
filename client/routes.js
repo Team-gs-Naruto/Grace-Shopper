@@ -9,10 +9,10 @@ import {
   UserHome,
   AllSneakers,
   SingleSneaker,
-  Cart
+  Cart,
+  AllUsers
 } from './components'
 import {me} from './store'
-import {AllUsers} from './components/allUsers'
 
 /**
  * COMPONENT
@@ -24,6 +24,9 @@ class Routes extends Component {
 
   render() {
     const {isLoggedIn, isAdmin} = this.props
+    console.log(this.props)
+    // const isAdmin = this.props.user.isAdmin
+    console.log(isAdmin)
 
     return (
       <Switch>
@@ -40,15 +43,13 @@ class Routes extends Component {
             {/* Routes placed here are only available after logging in */}
             <Route exact path="/home" component={UserHome} />
             <Route path="/:userId/cart" component={Cart} />
-            <Route exact path="/users" component={AllUsers} />
+            {isAdmin && (
+              <Switch>
+                <Route exact path="/users" component={AllUsers} />
+              </Switch>
+            )}
           </Switch>
         )}
-        {isLoggedIn &&
-          isAdmin && (
-            <Switch>
-              <Route exact path="/users" component={AllUsers} />
-            </Switch>
-          )}
         {/* Displays our Login component as a fallback */}
         {/* <Route component={Login} /> */}
       </Switch>
