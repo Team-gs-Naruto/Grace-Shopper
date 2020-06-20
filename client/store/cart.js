@@ -83,11 +83,25 @@ export const getCartThunk = userId => {
             })
           })
         )
-
-        // need to send localstorage cart back to user in this condition to merge the cart in the backend and create instance for it
-
+        localStorage.setItem('cart', JSON.stringify([]))
         const {data} = await axios.get(`/api/users/${userId}/cart`)
         dispatch(getCart(data.sneakers))
+      }
+    } catch (err) {
+      console.log(err)
+    }
+  }
+}
+
+export const removeSneakerThunk = (userId, sneakerId) => {
+  return async dispatch => {
+    try {
+      if (!userId) {
+        let cartArr = JSON.parse(localStorage.getItem('cart'))
+        let filteredCart = cartArr.filter(sneaker => sneaker.id !== sneakerId)
+        console.log('this is my filteredCart: ', filteredCart)
+        localStorage.setItem('cart', JSON.stringify(filteredCart))
+        dispatch(removeSneakerFromCart(sneakerId))
       }
     } catch (err) {
       console.log(err)
@@ -103,7 +117,7 @@ export default function cartReducer(state = initialState, action) {
     case ADD_SNEAKER_TO_CART:
       return action.item
     case REMOVE_SNEAKER_FROM_CART:
-      return state.filter(sneaker => sneaker !== action.id)
+      return state.filter(sneaker => sneaker.id !== action.id)
     case GET_CART:
       return action.cart
     default:
