@@ -1,7 +1,7 @@
 import React from 'react'
-import {removeFromCart, fetchCartFromStorage} from '../store/cart'
+import {fetchCartFromStorage} from '../store/cart'
 import {connect} from 'react-redux'
-import Button from 'react-bootstrap/Button'
+import CartCard from './cartCard'
 
 export class Cart extends React.Component {
   constructor() {
@@ -12,36 +12,12 @@ export class Cart extends React.Component {
     this.props.fetchCartFromStorage()
   }
   render() {
-    let sneakers = this.props.userCart
+    let items = this.props.userCart
     return (
       <div>
-        {sneakers ? (
-          sneakers.map(sneaker => (
-            <div key={sneaker.id}>
-              <div>
-                <Button
-                  type="button"
-                  variant="danger"
-                  onClick={() => removeSneaker(sneaker.id)}
-                >
-                  Remove
-                </Button>
-              </div>
-
-              <div>
-                <img src={sneaker.media} />
-              </div>
-
-              <div>{sneaker.title}</div>
-
-              <div>{sneaker.retailPrice}</div>
-            </div>
-          ))
-        ) : (
-          <div>
-            <h3 className="text-center">Your cart is empty</h3>
-          </div>
-        )}
+        {items.map(item => {
+          return <CartCard key={item.id} userCart={item} />
+        })}
       </div>
     )
   }

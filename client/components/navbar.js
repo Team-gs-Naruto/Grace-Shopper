@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom'
 import {logout} from '../store'
 import Navbar from 'react-bootstrap/Navbar'
 
-const NavBar = ({handleClick, isLoggedIn, user}) => (
+const NavBar = ({handleClick, isLoggedIn}) => (
   <div>
     <Navbar fixed="fixed" bg="dark" variant="dark">
       <Navbar.Brand href="/homepage">
@@ -61,8 +61,7 @@ const mapState = state => {
   return {
     isLoggedIn: !!state.user.id,
     user: state.user,
-    cart: state.cart,
-    userId: state.user.id
+    cart: state.cart
   }
 }
 

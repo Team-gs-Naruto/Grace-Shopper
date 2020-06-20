@@ -11,7 +11,7 @@ export const reducer = combineReducers({
   user,
   allSneakers: sneakerReducer,
   singleSneaker: singleSneakerReducer,
-  cart: cartReducer
+  cartReducer
 })
 
 const middleware = composeWithDevTools(
