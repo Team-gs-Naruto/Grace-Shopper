@@ -24,14 +24,38 @@ export const getCart = cart => ({
 })
 
 // THUNK CREATORS
-export const addSneakerToCartThunk = (sneakerId, userId, sneakerPrice) => {
+export const addSneakerToCartThunk = (sneaker, userId) => {
   return async dispatch => {
     try {
-      const {data} = await axios.post(`/api/users/${userId}/cart`, {
-        sneakerId,
-        sneakerPrice
-      })
-      dispatch(addSneakerToCart(data))
+      if (userId) {
+        const {data} = await axios.post(`/api/users/${userId}/cart`, {
+          sneakerId: sneaker.id,
+          sneakerPrice: sneaker.retailPrice
+        })
+        dispatch(addSneakerToCart(data.sneakers))
+      } else if (!userId && !localStorage.getItem('cart')) {
+        // If I am a guest and there are no items in localstorage cart
+        localStorage.setItem('cart', JSON.stringify([sneaker]))
+        const cartArr = JSON.parse(localStorage.getItem('cart'))
+        dispatch(addSneakerToCart(cartArr))
+      } else {
+        // If I am a guest and i have items in localstorage cart
+        const cartArr = JSON.parse(localStorage.getItem('cart'))
+        let alreadyInCart = false
+
+        cartArr.forEach(item => {
+          if (item.id === sneaker.id) {
+            alreadyInCart = true
+          }
+        })
+
+        if (alreadyInCart === false) {
+          cartArr.push(sneaker)
+        }
+        localStorage.setItem('cart', JSON.stringify(cartArr))
+        const newCartArr = JSON.parse(localStorage.getItem('cart'))
+        dispatch(addSneakerToCart(newCartArr))
+      }
     } catch (err) {
       console.log(err)
     }
@@ -41,8 +65,15 @@ export const addSneakerToCartThunk = (sneakerId, userId, sneakerPrice) => {
 export const getCartThunk = userId => {
   return async dispatch => {
     try {
-      const {data} = await axios.get(`/api/users/${userId}/cart`)
-      dispatch(getCart(data))
+      if (!localStorage.getItem('cart')) {
+        localStorage.setItem('cart', JSON.stringify([]))
+      } else if (!userId) {
+        dispatch(getCart(JSON.parse(localStorage.getItem('cart'))))
+      } else {
+        // need to send localstorage cart back to user in this condition to merge the cart in the backend and create instance for it
+        const {data} = await axios.get(`/api/users/${userId}/cart`)
+        dispatch(getCart(data.sneakers))
+      }
     } catch (err) {
       console.log(err)
     }
@@ -50,7 +81,7 @@ export const getCartThunk = userId => {
 }
 
 //REDUCER
-const initialState = {}
+const initialState = []
 
 export default function cartReducer(state = initialState, action) {
   switch (action.type) {

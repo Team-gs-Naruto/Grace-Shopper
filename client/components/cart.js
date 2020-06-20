@@ -4,7 +4,7 @@ import {connect} from 'react-redux'
 
 export class Cart extends React.Component {
   componentDidMount() {
-    this.props.getCart(this.props.match.params.userId)
+    this.props.getCart(this.props.match.params.userId || null)
   }
 
   render() {
@@ -12,8 +12,8 @@ export class Cart extends React.Component {
 
     return (
       <div>
-        {cart && cart.sneakers ? (
-          cart.sneakers.map(sneaker => (
+        {cart.length ? (
+          cart.map(sneaker => (
             <div key={sneaker.id}>
               <div>
                 <button
