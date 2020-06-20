@@ -1,11 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {Link} from 'react-router-dom'
+import {Link, Switch} from 'react-router-dom'
 import {logout} from '../store'
 import Navbar from 'react-bootstrap/Navbar'
 
-const NavBar = ({handleClick, isLoggedIn, user}) => (
+const NavBar = ({handleClick, isLoggedIn, user, isAdmin}) => (
   <div>
     <Navbar fixed="fixed" bg="dark" variant="dark">
       <Navbar.Brand href="/homepage">
@@ -33,6 +33,13 @@ const NavBar = ({handleClick, isLoggedIn, user}) => (
           {/* MAKE SURE TO USE THE USER ID ROUTE PATH IF THEY ARE LOGGED IN */}
           <Link to={`/${user.id}/cart`}>Cart</Link>
           &nbsp; &nbsp; &nbsp; &nbsp;
+          {isAdmin && (
+            <Switch>
+              <React.Fragment>
+                <Link to="/users">Users</Link>
+              </React.Fragment>
+            </Switch>
+          )}
         </div>
       ) : (
         <div>
@@ -60,6 +67,7 @@ const NavBar = ({handleClick, isLoggedIn, user}) => (
 const mapState = state => {
   return {
     isLoggedIn: !!state.user.id,
+    isAdmin: state.user.isAdmin,
     user: state.user,
     cart: state.cart,
     userId: state.user.id
