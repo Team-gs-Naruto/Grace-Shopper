@@ -67,8 +67,8 @@ router.delete('/:userId/cart', async (req, res, next) => {
         itemId: req.body.id
       }
     })
-    res.json('Item successfully deleted')
   } catch (error) {
     next(error)
   }
 })
+module.exports = router
