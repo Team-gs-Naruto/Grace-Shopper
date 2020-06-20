@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {User, Order, Purchase} = require('../db/models')
+const {User, Order, LineItem, Sneakers} = require('../db/models')
 module.exports = router
 
 router.get('/', async (req, res, next) => {
@@ -11,55 +11,64 @@ router.get('/', async (req, res, next) => {
       attributes: ['id', 'email']
     })
     res.json(users)
-  } catch (err) {
-    next(err)
+  } catch (error) {
+    next(error)
   }
 })
 
+// Cart Routes
+
+// retrieve our cart
 router.get('/:userId/cart', async (req, res, next) => {
   try {
-    const order = await Order.findOne({
+    const userOrder = await Order.findOne({
       where: {
-        userId: +req.params.userId,
+        userId: req.params.userId,
         isComplete: false
       },
       include: {all: true, nested: true}
     })
-
-    res.json(order)
-  } catch (err) {
-    next(err)
+    res.json(userOrder)
+  } catch (error) {
+    next(error)
   }
 })
 
+//  add to cart
 router.post('/:userId/cart', async (req, res, next) => {
   try {
-    const order = await Order.findOrCreate({
+    const userOrder = await Order.findOrCreate({
       where: {
-        userId: +req.params.userId,
+        userId: req.params.userId,
         isComplete: false
       }
-    }).spread(foundOrCreatedOrder => {
-      return Purchase.findOrCreate({
-        where: {
-          quantity: 1,
-          orderId: +foundOrCreatedOrder.id,
-          sneakerId: +req.body.sneakerId,
-          priceAtPurchase: +req.body.sneakerPrice
-        }
-      })
     })
+    await LineItem.create({
+      itemId: req.body.id,
+      orderId: userOrder.id
+    })
+  } catch (error) {
+    next(error)
+  }
+})
 
-    const findOrder = await Order.findOne({
+// remove from cart
+router.delete('/:userId/cart', async (req, res, next) => {
+  try {
+    const userOrder = await Order.findOne({
       where: {
-        userId: +req.params.userId,
+        customerId: req.params.id,
         isComplete: false
-      },
-      include: {all: true, nested: true}
+      }
     })
-
-    res.json(findOrder)
-  } catch (err) {
-    next(err)
+    await LineItem.destroy({
+      where: {
+        orderId: userOrder.id,
+        itemId: req.body.id
+      }
+    })
+    res.json('Item successfully deleted')
+  } catch (error) {
+    next(error)
   }
 })
