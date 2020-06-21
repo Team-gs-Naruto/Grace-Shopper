@@ -61,6 +61,29 @@ router.get(
   }
 )
 
+router.put(
+  '/:id',
+  checkAuth.notAGuest,
+  checkAuth.isAdmin,
+  async (req, res, next) => {
+    console.log(req.body)
+    try {
+      const user = await User.findOne({
+        where: {
+          id: req.params.id
+        }
+      })
+
+      user.isAdmin = req.body.isAdmin
+      await user.save()
+
+      res.json(user)
+    } catch (err) {
+      next(err)
+    }
+  }
+)
+
 router.post(
   '/:userId/cart',
   checkAuth.notAGuest,
