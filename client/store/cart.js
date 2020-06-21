@@ -1,5 +1,4 @@
 import axios from 'axios'
-import Order from '../../server/db/models/orders'
 
 //ACTION TYPE
 const ADD_SNEAKER_TO_CART = 'ADD_SNEAKER_TO_CART'
