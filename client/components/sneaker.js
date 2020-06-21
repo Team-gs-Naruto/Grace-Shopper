@@ -1,5 +1,4 @@
 import React from 'react'
-import {Col} from 'react-bootstrap'
 
 const ShopPageSneaker = props => {
   const {sneaker} = props
@@ -9,11 +8,11 @@ const ShopPageSneaker = props => {
         <img src={sneaker.media} />
       </div>
       <div className="card-content">
-        <p className="card-text center">{sneaker.title}</p>
+        <p className="card-text center black-text">{sneaker.title}</p>
         {Number(sneaker.retailPrice) ? (
-          <h6 className="center">${sneaker.retailPrice}</h6>
+          <h6 className="center black-text">${sneaker.retailPrice}</h6>
         ) : (
-          <h6 className="center">Sold Out</h6>
+          <h6 className="center black-text">Sold Out</h6>
         )}
       </div>
     </div>
