@@ -38,7 +38,3 @@ form div {
   justify-content: space-between;
   flex-wrap: wrap;
 }
-
-.navbar-material .nav-wrapper .brand-logo img {
-  height: 10px;
-}

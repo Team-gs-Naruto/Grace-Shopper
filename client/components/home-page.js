@@ -5,7 +5,6 @@ import Slider from './slider'
 const HomePage = () => {
   return (
     <div>
-      <Slider />
       <Parallax />
     </div>
   )

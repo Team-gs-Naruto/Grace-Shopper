@@ -15,7 +15,7 @@ var Img = (
 const NavBar = ({handleClick, isLoggedIn, user}) => (
   <div>
     <div className="navbar-fixed">
-      <nav className="teal lighten-2">
+      <nav className="grey">
         <div className="nav-wrapper">
           &nbsp; &nbsp; &nbsp; &nbsp;
           <a href="/homepage" className="brand-logo">
