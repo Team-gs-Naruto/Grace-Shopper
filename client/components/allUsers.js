@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
 import User from './user'
-import {Link} from 'react-router-dom'
-import {Container, Row, Col} from 'react-bootstrap'
+
 import {connect} from 'react-redux'
 import {fetchUsers} from '../store/all-users'
 
@@ -12,6 +11,7 @@ export class AllUsers extends Component {
 
   render() {
     const users = this.props.users
+
     return (
       <div>
         {!users ? (
@@ -23,19 +23,11 @@ export class AllUsers extends Component {
             <div className="text-center">
               <h1>All Users</h1>
             </div>
-            <Container>
-              <Row>
-                {users.map(user => (
-                  <div key={user.id}>
-                    <Col>
-                      <Link to={`/user/${user.id}`}>
-                        <User user={user} />
-                      </Link>
-                    </Col>
-                  </div>
-                ))}
-              </Row>
-            </Container>
+            {users.map(user => (
+              <div key={user.id}>
+                <User user={user} />
+              </div>
+            ))}
           </div>
         )}
       </div>
@@ -44,7 +36,7 @@ export class AllUsers extends Component {
 }
 
 const mapState = state => ({
-  users: state.allUsers
+  users: state.allUsers.users
 })
 
 const mapDispatch = dispatch => ({
