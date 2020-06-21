@@ -10,7 +10,8 @@ import {
   AllSneakers,
   SingleSneaker,
   Cart,
-  AllUsers
+  AllUsers,
+  SingleUser
 } from './components'
 import {me} from './store'
 
@@ -34,7 +35,6 @@ class Routes extends Component {
         <Route path="/cart" component={Cart} />
         <Route exact path="/shop" component={AllSneakers} />
         <Route exact path="/shop/:id" component={SingleSneaker} />
-        ``
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
@@ -43,6 +43,7 @@ class Routes extends Component {
             {isAdmin && (
               <Switch>
                 <Route exact path="/users" component={AllUsers} />
+                <Route exact path="/users/:id" component={SingleUser} />
               </Switch>
             )}
           </Switch>
@@ -84,5 +85,4 @@ export default withRouter(connect(mapState, mapDispatch)(Routes))
 Routes.propTypes = {
   loadInitialData: PropTypes.func.isRequired,
   isLoggedIn: PropTypes.bool.isRequired
-  // isAdmin: PropTypes.bool.isRequired,
 }

@@ -23,6 +23,24 @@ router.get(
 )
 
 router.get(
+  '/:id',
+  checkAuth.notAGuest,
+  checkAuth.isAdmin,
+  async (req, res, next) => {
+    try {
+      const user = await User.findOne({
+        where: {
+          id: req.params.id
+        }
+      })
+      res.json(user)
+    } catch (err) {
+      next(err)
+    }
+  }
+)
+
+router.get(
   '/:userId/cart',
   checkAuth.notAGuest,
   checkAuth.isAdmin,
