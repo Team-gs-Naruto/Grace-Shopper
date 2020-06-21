@@ -1,22 +1,20 @@
 import React from 'react'
+import {Col} from 'react-bootstrap'
 
 const ShopPageSneaker = props => {
   const {sneaker} = props
   return (
-    <div className="row">
-      <div className="col s12 m6">
-        <div className="card">
-          <div className="card-image">
-            <img src={sneaker.media} />
-            <span className="card-title">{sneaker.title}</span>
-            <a className="btn-floating halfway-fab waves-effect waves-light red">
-              <i className="material-icons">add</i>
-            </a>
-          </div>
-          <div className="card-content">
-            <p>{sneaker.retailPrice}</p>
-          </div>
-        </div>
+    <div className="card hoverable small">
+      <div className="card-image responsive-media">
+        <img src={sneaker.media} />
+      </div>
+      <div className="card-content">
+        <p className="card-text center">{sneaker.title}</p>
+        {Number(sneaker.retailPrice) ? (
+          <h6 className="center">${sneaker.retailPrice}</h6>
+        ) : (
+          <h6 className="center">Sold Out</h6>
+        )}
       </div>
     </div>
   )

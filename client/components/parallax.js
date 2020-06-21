@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import M from 'materialize-css'
 import Slider from './slider'
+import Preview from './preview'
 
 const Parallax = () => {
   useEffect(() => {
@@ -29,7 +30,7 @@ const Parallax = () => {
       </div>
       <div className="section white">
         <div className="row container">
-          <Slider />
+          <Preview />
         </div>
       </div>
       <div className="parallax-container">
@@ -37,6 +38,7 @@ const Parallax = () => {
           <img src="https://i.pinimg.com/originals/b3/35/fb/b335fb19aee071b7e32809c4466e7d4f.jpg" />
         </div>
       </div>
+      <Slider />
     </div>
   )
 }

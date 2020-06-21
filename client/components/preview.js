@@ -2,10 +2,10 @@ import React from 'react'
 import {connect} from 'react-redux'
 import ShopPageSneaker from './sneaker'
 import {Link} from 'react-router-dom'
-import {fetchSneakers} from '../store/all-sneakers'
+import {fetchPreview} from '../store/all-sneakers'
 import {Row, Col, Container} from 'react-bootstrap'
 
-export class AllSneakers extends React.Component {
+export class Preview extends React.Component {
   componentDidMount() {
     this.props.fetchSneakers()
   }
@@ -38,7 +38,7 @@ const mapState = state => ({
 })
 
 const mapDispatch = dispatch => ({
-  fetchSneakers: () => dispatch(fetchSneakers())
+  fetchSneakers: () => dispatch(fetchPreview())
 })
 
-export default connect(mapState, mapDispatch)(AllSneakers)
+export default connect(mapState, mapDispatch)(Preview)

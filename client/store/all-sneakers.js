@@ -23,6 +23,17 @@ export const fetchSneakers = () => {
   }
 }
 
+export const fetchPreview = () => {
+  return async dispatch => {
+    try {
+      const {data} = await Axios.get('/api/sneakers/preview')
+      dispatch(setSneakers(data))
+    } catch (error) {
+      console.log('ERROR IN FETCHPREVIEW THUNK')
+    }
+  }
+}
+
 // REDUCERS
 export default function sneakerReducer(state = [], action) {
   switch (action.type) {

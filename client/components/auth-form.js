@@ -2,43 +2,61 @@ import React from 'react'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import {auth} from '../store'
-import Form from 'react-bootstrap/Form'
-import Button from 'react-bootstrap/Button'
-import Container from 'react-bootstrap/Container'
 /**
  * COMPONENT
  */
 const AuthForm = props => {
   const {name, displayName, handleSubmit, error} = props
   return (
-    <Container fluid="sm">
-      <Form onSubmit={handleSubmit} name={name}>
-        <Form.Group>
-          <Form.Label htmlFor="email">Email address</Form.Label>
-          <Form.Control type="email" placeholder="Enter email" name="email" />
-          <Form.Text className="text-muted">
-            We'll never share your email with anyone else.
-          </Form.Text>
-        </Form.Group>
-        <Form.Group>
-          <Form.Label htmlFor="password">Password</Form.Label>
-          <Form.Control
-            type="password"
-            placeholder="Password"
-            name="password"
-          />
-        </Form.Group>
-        <Form.Group>
-          <Form.Check type="checkbox" label="Remember me" />
-        </Form.Group>
-        <Button variant="primary" type="submit">
-          {displayName}
-        </Button>
-        {error && error.response && <div> {error.response.data} </div>}
-        &nbsp; &nbsp; &nbsp; &nbsp;
-        <a href="/auth/google">{displayName} with Google</a>
-      </Form>
-    </Container>
+    <div className="container">
+      <div className="row">
+        <div className="col m6">
+          <h2 className="center-align">{displayName}</h2>
+          <div className="row">
+            <form className="col s12" onSubmit={handleSubmit} name={name}>
+              <div className="row">
+                <div className="input-field col s12">
+                  <input id="email" type="email" className="validate" />
+                  <label htmlFor="email">Email</label>
+                </div>
+              </div>
+              <div className="row">
+                <div className="input-field col s12">
+                  <input id="pass" type="password" className="validate" />
+                  <label htmlFor="password">Password</label>
+                </div>
+              </div>
+              <div className="row">
+                <div className="col s12">
+                  <p>
+                    <input type="checkbox" id="remember" />
+                    <label htmlFor="remember">Remember me</label>
+                  </p>
+                </div>
+              </div>
+              <div className="divider" />
+              <div className="row">
+                <div className="col m12">
+                  <p className="right-align">
+                    <button
+                      className="btn btn-large waves-effect waves-light"
+                      type="submit"
+                      name="action"
+                    >
+                      {displayName}
+                    </button>
+                  </p>
+                  {error &&
+                    error.response && <div> {error.response.data} </div>}
+                  &nbsp; &nbsp; &nbsp; &nbsp;
+                  <a href="/auth/google">{displayName} with Google</a>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
   )
 }
 

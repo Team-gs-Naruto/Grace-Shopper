@@ -4,12 +4,12 @@ import M from 'materialize-css'
 export default class Slider extends React.Component {
   componentDidMount() {
     var elem = document.querySelector('.carousel')
-    var instance = M.Carousel.init(elem, {duration: 400})
+    var instance = M.Carousel.init(elem, {duration: 600})
   }
   render() {
     return (
       <div className="container center-align">
-        <div className="carousel">
+        <div className="carousel ">
           <h2>New In</h2>
           <a className="carousel-item" href="#one!">
             <img src="https://stockx-360.imgix.net/Air-Jordan-1-Retro-High-Off-White-University-Blue/Images/Air-Jordan-1-Retro-High-Off-White-University-Blue/Lv2/img01.jpg?auto=format,compress&q=90&updated_at=1538080256&w=1000" />
