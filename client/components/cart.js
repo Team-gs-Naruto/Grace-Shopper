@@ -1,5 +1,5 @@
 import React from 'react'
-import {removeSneakerFromCart, getCartThunk} from '../store/cart'
+import {removeSneakerThunk, getCartThunk} from '../store/cart'
 import {connect} from 'react-redux'
 import Button from 'react-bootstrap/Button'
 
@@ -9,7 +9,7 @@ export class Cart extends React.Component {
   }
 
   render() {
-    const {cart, removeSneaker} = this.props
+    const {cart, removeSneaker, user} = this.props
 
     return (
       <div>
@@ -20,7 +20,7 @@ export class Cart extends React.Component {
                 <Button
                   type="button"
                   variant="danger"
-                  onClick={() => removeSneaker(sneaker.id)}
+                  onClick={() => removeSneaker(user.id, sneaker.id)}
                 >
                   Remove
                 </Button>
@@ -46,11 +46,13 @@ export class Cart extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  cart: state.cart
+  cart: state.cart,
+  user: state.user
 })
 
 const mapDispatchToProps = dispatch => ({
-  removeSneaker: id => dispatch(removeSneakerFromCart(id)),
+  removeSneaker: (userId, sneakerId) =>
+    dispatch(removeSneakerThunk(userId, sneakerId)),
   getCart: id => dispatch(getCartThunk(id))
 })
 
