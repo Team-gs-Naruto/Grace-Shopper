@@ -25,7 +25,6 @@ router.get('/:userId/cart', async (req, res, next) => {
       },
       include: {all: true, nested: true}
     })
-
     res.json(order)
   } catch (err) {
     next(err)
@@ -59,6 +58,26 @@ router.post('/:userId/cart', async (req, res, next) => {
     })
 
     res.json(findOrder)
+  } catch (err) {
+    next(err)
+  }
+})
+
+router.delete('/:userId/cart', async (req, res, next) => {
+  try {
+    const order = await Order.findOne({
+      where: {
+        userId: +req.params.userId,
+        isComplete: false
+      }
+    })
+    const purchase = await Purchase.destroy({
+      where: {
+        sneakerId: +req.body.sneakerId,
+        orderId: order.id
+      }
+    })
+    res.json(purchase)
   } catch (err) {
     next(err)
   }
