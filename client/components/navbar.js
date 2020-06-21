@@ -4,7 +4,7 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {logout} from '../store'
 
-var Img = (
+const Img = (
   <img
     src="https://media.giphy.com/media/dsQ0bGwVVi0aPkKo9J/giphy.gif"
     width="80"

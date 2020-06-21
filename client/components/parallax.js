@@ -3,6 +3,7 @@ import M from 'materialize-css'
 import Slider from './slider'
 import Preview from './preview'
 import {Jumbotron, Container, Button} from 'react-bootstrap'
+import {Link} from 'react-router-dom'
 
 const Parallax = () => {
   useEffect(() => {
@@ -13,12 +14,8 @@ const Parallax = () => {
     <div>
       <div className="parallax-container">
         <div className="parallax">
-          <Jumbotron>
-            <img src="https://images.unsplash.com/photo-1512374382149-233c42b6a83b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80" />
-            <div className="center">
-              <a className="waves-effect waves-light btn-large">Shop Now</a>
-            </div>
-          </Jumbotron>
+          <img src="https://images.unsplash.com/photo-1512374382149-233c42b6a83b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80" />
+          <div className="center" />
         </div>
       </div>
       <div className="section white">

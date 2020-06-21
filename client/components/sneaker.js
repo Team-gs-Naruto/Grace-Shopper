@@ -3,7 +3,7 @@ import React from 'react'
 const ShopPageSneaker = props => {
   const {sneaker} = props
   return (
-    <div className="card hoverable small">
+    <div className="card hoverable medium">
       <div className="card-image responsive-media">
         <img src={sneaker.media} />
       </div>

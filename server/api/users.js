@@ -48,7 +48,7 @@ router.post('/:userId/cart', async (req, res, next) => {
         }
       })
     })
-
+    // find a sneaker that was added to cart which is in purchase model and decrease quantity based on quantity in order model
     const findOrder = await Order.findOne({
       where: {
         userId: +req.params.userId,

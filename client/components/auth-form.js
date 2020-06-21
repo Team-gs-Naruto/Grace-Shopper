@@ -9,8 +9,8 @@ const AuthForm = props => {
   const {name, displayName, handleSubmit, error} = props
   return (
     <div className="container">
-      <div className="row">
-        <div className="col m6">
+      <div className="row center">
+        <div className="col offset-m3 m6">
           <h2 className="center-align">{displayName}</h2>
           <div className="row">
             <form className="col s12" onSubmit={handleSubmit} name={name}>
@@ -22,22 +22,16 @@ const AuthForm = props => {
               </div>
               <div className="row">
                 <div className="input-field col s12">
-                  <input id="pass" type="password" className="validate" />
+                  <input id="password" type="password" className="validate" />
                   <label htmlFor="password">Password</label>
                 </div>
               </div>
               <div className="row">
-                <div className="col s12">
-                  <p>
-                    <input type="checkbox" id="remember" />
-                    <label htmlFor="remember">Remember me</label>
-                  </p>
-                </div>
-              </div>
-              <div className="divider" />
-              <div className="row">
                 <div className="col m12">
-                  <p className="right-align">
+                  <a className="left-align" href="/auth/google">
+                    {displayName} with Google
+                  </a>
+                  <p className="center">
                     <button
                       className="btn btn-large waves-effect waves-light"
                       type="submit"
@@ -49,7 +43,6 @@ const AuthForm = props => {
                   {error &&
                     error.response && <div> {error.response.data} </div>}
                   &nbsp; &nbsp; &nbsp; &nbsp;
-                  <a href="/auth/google">{displayName} with Google</a>
                 </div>
               </div>
             </form>
