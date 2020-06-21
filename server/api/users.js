@@ -120,3 +120,23 @@ router.post(
     }
   }
 )
+
+router.delete('/:userId/cart', async (req, res, next) => {
+  try {
+    const order = await Order.findOne({
+      where: {
+        userId: +req.params.userId,
+        isComplete: false
+      }
+    })
+    const purchase = await Purchase.destroy({
+      where: {
+        sneakerId: +req.body.sneakerId,
+        orderId: order.id
+      }
+    })
+    res.json(purchase)
+  } catch (err) {
+    next(err)
+  }
+})

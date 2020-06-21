@@ -24,14 +24,38 @@ export const getCart = cart => ({
 })
 
 // THUNK CREATORS
-export const addSneakerToCartThunk = (sneakerId, userId, sneakerPrice) => {
+export const addSneakerToCartThunk = (sneaker, userId) => {
   return async dispatch => {
     try {
-      const {data} = await axios.post(`/api/users/${userId}/cart`, {
-        sneakerId,
-        sneakerPrice
-      })
-      dispatch(addSneakerToCart(data))
+      if (userId) {
+        const {data} = await axios.post(`/api/users/${userId}/cart`, {
+          sneakerId: sneaker.id,
+          sneakerPrice: sneaker.retailPrice
+        })
+        dispatch(addSneakerToCart(data.sneakers))
+      } else if (!userId && !localStorage.getItem('cart')) {
+        // If I am a guest and there are no items in localstorage cart
+        localStorage.setItem('cart', JSON.stringify([sneaker]))
+        const cartArr = JSON.parse(localStorage.getItem('cart'))
+        dispatch(addSneakerToCart(cartArr))
+      } else {
+        // If I am a guest and i have items in localstorage cart
+        const cartArr = JSON.parse(localStorage.getItem('cart'))
+        let alreadyInCart = false
+
+        cartArr.forEach(item => {
+          if (item.id === sneaker.id) {
+            alreadyInCart = true
+          }
+        })
+
+        if (alreadyInCart === false) {
+          cartArr.push(sneaker)
+        }
+        localStorage.setItem('cart', JSON.stringify(cartArr))
+        const newCartArr = JSON.parse(localStorage.getItem('cart'))
+        dispatch(addSneakerToCart(newCartArr))
+      }
     } catch (err) {
       console.log(err)
     }
@@ -41,8 +65,46 @@ export const addSneakerToCartThunk = (sneakerId, userId, sneakerPrice) => {
 export const getCartThunk = userId => {
   return async dispatch => {
     try {
-      const {data} = await axios.get(`/api/users/${userId}/cart`)
-      dispatch(getCart(data))
+      if (!localStorage.getItem('cart')) {
+        // If I am a guest and there are no items in localstorage cart
+        localStorage.setItem('cart', JSON.stringify([]))
+      } else if (!userId) {
+        // If I am a guest and i have items in localstorage cart
+        dispatch(getCart(JSON.parse(localStorage.getItem('cart'))))
+      } else {
+        //  If I am a user and I have iems in localstorage cart
+        let cartArr = JSON.parse(localStorage.getItem('cart'))
+
+        while (cartArr.length) {
+          const item = cartArr[0]
+          await axios.post(`/api/users/${userId}/cart`, {
+            sneakerId: item.id,
+            sneakerPrice: item.retailPrice
+          })
+          cartArr.shift()
+        }
+        localStorage.setItem('cart', JSON.stringify([]))
+        const {data} = await axios.get(`/api/users/${userId}/cart`)
+        dispatch(getCart(data.sneakers))
+      }
+    } catch (err) {
+      console.log(err)
+    }
+  }
+}
+
+export const removeSneakerThunk = (userId, sneakerId) => {
+  return async dispatch => {
+    try {
+      if (!userId) {
+        let cartArr = JSON.parse(localStorage.getItem('cart'))
+        let filteredCart = cartArr.filter(sneaker => sneaker.id !== sneakerId)
+        localStorage.setItem('cart', JSON.stringify(filteredCart))
+        dispatch(removeSneakerFromCart(sneakerId))
+      } else {
+        await axios.delete(`/api/users/${userId}/cart`, {data: {sneakerId}})
+        dispatch(removeSneakerFromCart(sneakerId))
+      }
     } catch (err) {
       console.log(err)
     }
@@ -50,14 +112,14 @@ export const getCartThunk = userId => {
 }
 
 //REDUCER
-const initialState = {}
+const initialState = []
 
 export default function cartReducer(state = initialState, action) {
   switch (action.type) {
     case ADD_SNEAKER_TO_CART:
       return action.item
     case REMOVE_SNEAKER_FROM_CART:
-      return state.sneakers.filter(sneaker => sneaker.id !== action.id)
+      return state.filter(sneaker => sneaker.id !== action.id)
     case GET_CART:
       return action.cart
     default:
