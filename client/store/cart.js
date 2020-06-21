@@ -70,11 +70,11 @@ export const getCartThunk = userId => {
         localStorage.setItem('cart', JSON.stringify([]))
       } else if (!userId) {
         // If I am a guest and i have items in localstorage cart
+        console.log('im un here but whyy?? this is userId, ')
         dispatch(getCart(JSON.parse(localStorage.getItem('cart'))))
       } else {
         //  If I am a user and I have iems in localstorage cart
         let cartArr = JSON.parse(localStorage.getItem('cart'))
-
         await Promise.all(
           cartArr.map(item => {
             return axios.post(`/api/users/${userId}/cart`, {
@@ -99,8 +99,10 @@ export const removeSneakerThunk = (userId, sneakerId) => {
       if (!userId) {
         let cartArr = JSON.parse(localStorage.getItem('cart'))
         let filteredCart = cartArr.filter(sneaker => sneaker.id !== sneakerId)
-        console.log('this is my filteredCart: ', filteredCart)
         localStorage.setItem('cart', JSON.stringify(filteredCart))
+        dispatch(removeSneakerFromCart(sneakerId))
+      } else {
+        await axios.delete(`/api/users/${userId}/cart`, {data: {sneakerId}})
         dispatch(removeSneakerFromCart(sneakerId))
       }
     } catch (err) {
