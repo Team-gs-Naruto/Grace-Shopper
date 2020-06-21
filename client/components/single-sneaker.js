@@ -9,8 +9,8 @@ export class SingleSneaker extends React.Component {
     this.props.fetchSingleSneaker(this.props.match.params.id)
   }
 
-  handleClick = (id, retailPrice) => {
-    this.props.addToCart(id, this.props.user.id, retailPrice)
+  handleClick = sneaker => {
+    this.props.addToCart(sneaker, this.props.user.id || null)
   }
 
   render() {
@@ -31,7 +31,7 @@ export class SingleSneaker extends React.Component {
         <button
           type="button"
           onClick={() => {
-            this.handleClick(sneaker.id, sneaker.retailPrice)
+            this.handleClick(sneaker)
           }}
         >
           Add to Cart
