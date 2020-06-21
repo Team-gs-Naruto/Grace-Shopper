@@ -6,9 +6,11 @@ import user from './user'
 import cartReducer from './cart'
 import sneakerReducer from './all-sneakers'
 import singleSneakerReducer from './single-sneaker'
+import allUserReducer from './all-users'
 
 export const reducer = combineReducers({
   user,
+  allUsers: allUserReducer,
   allSneakers: sneakerReducer,
   singleSneaker: singleSneakerReducer,
   cart: cartReducer
