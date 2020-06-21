@@ -70,29 +70,19 @@ export const getCartThunk = userId => {
         localStorage.setItem('cart', JSON.stringify([]))
       } else if (!userId) {
         // If I am a guest and i have items in localstorage cart
-        console.log('im un here but whyy?? this is userId, ')
         dispatch(getCart(JSON.parse(localStorage.getItem('cart'))))
       } else {
         //  If I am a user and I have iems in localstorage cart
         let cartArr = JSON.parse(localStorage.getItem('cart'))
-        // await Promise.all(
-        cartArr.map(item => {
-          return Promise.all(
-            axios.post(`/api/users/${userId}/cart`, {
-              sneakerId: item.id,
-              sneakerPrice: item.retailPrice
-            })
-          )
-        })
-        // )
-        // await Promise.all(
-        //   cartArr.map(item => {
-        //     return axios.post(`/api/users/${userId}/cart`, {
-        //       sneakerId: item.id,
-        //       sneakerPrice: item.retailPrice
-        //     })
-        //   })
-        // )
+
+        while (cartArr.length) {
+          const item = cartArr[0]
+          await axios.post(`/api/users/${userId}/cart`, {
+            sneakerId: item.id,
+            sneakerPrice: item.retailPrice
+          })
+          cartArr.shift()
+        }
         localStorage.setItem('cart', JSON.stringify([]))
         const {data} = await axios.get(`/api/users/${userId}/cart`)
         dispatch(getCart(data.sneakers))
