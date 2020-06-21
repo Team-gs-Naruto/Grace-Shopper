@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import User from './user'
-
+import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {fetchUsers} from '../store/all-users'
 
@@ -25,7 +25,7 @@ export class AllUsers extends Component {
             </div>
             {users.map(user => (
               <div key={user.id}>
-                <User user={user} />
+                <Link to={`/users/${user.id}`}>{user.email}</Link>
               </div>
             ))}
           </div>

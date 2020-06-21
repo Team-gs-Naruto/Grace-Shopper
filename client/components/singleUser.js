@@ -9,7 +9,6 @@ export class SingleUser extends Component {
   }
   render() {
     const {user} = this.props
-    console.log(this.props)
     return <User user={user} />
   }
 }

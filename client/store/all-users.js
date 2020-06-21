@@ -17,6 +17,18 @@ export const getOneUser = user => {
   }
 }
 
+export const updateUser = (id, isAdmin) => {
+  return async dispatch => {
+    try {
+      const {data} = await Axios.put(`/api/users/${id}`, isAdmin)
+
+      dispatch(getOneUser(data))
+    } catch (err) {
+      console.log('ERROR IN UPDATE USER THUNK')
+    }
+  }
+}
+
 export const fetchOneUser = id => {
   return async dispatch => {
     try {
