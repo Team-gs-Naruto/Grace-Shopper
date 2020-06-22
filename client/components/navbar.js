@@ -92,7 +92,6 @@ const NavBar = ({handleClick, isLoggedIn, user, isAdmin}) => (
               </div>
             )}
           </ul>
-          >>>>>>> 86f26a9c78f1de32233ca796d3cc60571337a89d
         </div>
       </nav>
     </div>

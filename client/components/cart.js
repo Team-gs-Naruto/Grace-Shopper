@@ -33,6 +33,11 @@ export class Cart extends React.Component {
               <div>{sneaker.title}</div>
 
               <div>{sneaker.retailPrice}</div>
+              {sneaker.purchase ? (
+                <div>{sneaker.purchase.quantity}</div>
+              ) : (
+                <div>null</div>
+              )}
             </div>
           ))
         ) : (
