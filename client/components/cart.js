@@ -36,7 +36,7 @@ export class Cart extends React.Component {
             </div>
           ))
         ) : (
-          <div>
+          <div className="container center">
             <h3 className="text-center">Your cart is empty</h3>
           </div>
         )}
