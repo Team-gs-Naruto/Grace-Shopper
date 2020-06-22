@@ -23,9 +23,9 @@ export class AllSneakers extends React.Component {
             {sneakers.map(sneaker => (
               <div key={sneaker.id}>
                 <Col>
-                  <Link to={`/shop/${sneaker.id}`}>
-                    <ShopPageSneaker sneaker={sneaker} />
-                  </Link>
+                  {/* <Link to={`/shop/${sneaker.id}`}> */}
+                  <ShopPageSneaker sneaker={sneaker} />
+                  {/* </Link> */}
                 </Col>
               </div>
             ))}

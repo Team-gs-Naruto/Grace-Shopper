@@ -8,7 +8,7 @@ const REMOVE_SNEAKER_FROM_CART = 'REMOVE_SNEAKER_FROM_CART'
 const GET_CART = 'GET_CART'
 
 // ACTION CREATORS
-const addSneakerToCart = item => ({
+export const addSneakerToCart = item => ({
   type: ADD_SNEAKER_TO_CART,
   item
 })
