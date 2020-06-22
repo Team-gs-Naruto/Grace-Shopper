@@ -7,6 +7,8 @@ const REMOVE_SNEAKER_FROM_CART = 'REMOVE_SNEAKER_FROM_CART'
 
 const GET_CART = 'GET_CART'
 
+const UPDATE_QTY = 'UPDATE_QTY'
+
 // ACTION CREATORS
 const addSneakerToCart = item => ({
   type: ADD_SNEAKER_TO_CART,
@@ -21,6 +23,21 @@ export const removeSneakerFromCart = id => ({
 export const getCart = cart => ({
   type: GET_CART,
   cart
+})
+
+const increment = id => ({
+  type: INCREMENT,
+  id
+})
+
+const decrement = id => ({
+  type: DECREMENT,
+  id
+})
+
+const updateQty = updated => ({
+  type: UPDATE_QTY,
+  updated
 })
 
 // THUNK CREATORS
@@ -111,17 +128,39 @@ export const removeSneakerThunk = (userId, sneakerId) => {
   }
 }
 
+export const updateQtyThunk = updated => async dispatch => {
+  try {
+    const {data} = await axios.put(`/api/cart/${updated.id}`, updated)
+    dispatch(updateQty(data))
+  } catch (err) {
+    console.error(err)
+  }
+}
+
 //REDUCER
 const initialState = []
 
 export default function cartReducer(state = initialState, action) {
   switch (action.type) {
-    case ADD_SNEAKER_TO_CART:
+    case ADD_SNEAKER_TO_CART: {
       return action.item
-    case REMOVE_SNEAKER_FROM_CART:
+    }
+    case REMOVE_SNEAKER_FROM_CART: {
       return state.filter(sneaker => sneaker.id !== action.id)
-    case GET_CART:
+    }
+    case GET_CART: {
       return action.cart
+    }
+    case UPDATE_QTY: {
+      const updatedCart = state.map(cart => {
+        if (cart.id === action.cart.id) {
+          return action.updated
+        } else {
+          return cart
+        }
+      })
+      return updatedCart
+    }
     default:
       return state
   }

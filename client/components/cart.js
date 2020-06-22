@@ -1,11 +1,31 @@
 import React from 'react'
-import {removeSneakerThunk, getCartThunk} from '../store/cart'
+import {updateQty, removeSneakerThunk, getCartThunk} from '../store/cart'
 import {connect} from 'react-redux'
 import Button from 'react-bootstrap/Button'
 
 export class Cart extends React.Component {
+  constructor() {
+    super()
+    this.increment = this.increment.bind()
+    this.decrement = this.decrement.bind
+  }
   componentDidMount() {
     this.props.getCart(this.props.match.params.userId || null)
+    const id = this.props.match.params.id
+  }
+  increment(item, cart) {
+    this.props.updateQty({
+      id: item.id,
+      quantity: item.quantity,
+      userId
+    })
+  }
+  decrement(item, cart) {
+    this.props.updateQty({
+      id: item.id,
+      quantity: item.quantity,
+      userId
+    })
   }
 
   render() {
