@@ -4,6 +4,9 @@ const {User, Sneakers} = require('../server/db/models')
 const Axios = require('axios')
 const chance = require('chance')(123)
 let allSneakers = []
+
+if (process.env.NODE_ENV !== 'production') require('../secrets')
+
 const getSneakersFromSwagger = async () => {
   const nikeSneakers = await Axios.get(
     `http://api.thesneakerdatabase.com/v1/sneakers?limit=34&brand=Nike`
@@ -64,19 +67,24 @@ function generateUsers() {
 const createUsers = async () => {
   return generateUsers().map(user => user.save())
 }
+
 async function seed() {
   await db.sync({force: true})
   console.log('db synced!')
-  // const users = await Promise.all([
-  //   User.create({email: 'cody@email.com', password: '123'}),
-  //   User.create({email: 'murphy@email.com', password: '123'})
-  // ])
+
   const users = await createUsers()
+  const admin = await User.create({
+    email: process.env.ADMIN_USER_EMAIL,
+    password: process.env.ADMIN_USER_PASSWORD,
+    isAdmin: true
+  })
+  admin.save()
   const sneakers = await Promise.all(
     createSeedData().map(sneaker => Sneakers.create(sneaker))
   )
   console.log(`seeded ${users.length} users`)
   console.log(`seeded ${sneakers.length} sneakers`)
+  console.log('seeded an admin')
   console.log(`seeded successfully`)
 }
 // We've separated the `seed` function from the `runSeed` function.
