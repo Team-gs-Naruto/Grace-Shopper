@@ -42,8 +42,7 @@ router.get(
 
 router.get(
   '/:userId/cart',
-  checkAuth.notAGuest,
-  checkAuth.isAdmin,
+
   async (req, res, next) => {
     try {
       const order = await Order.findOne({
@@ -63,8 +62,7 @@ router.get(
 
 router.put(
   '/:id',
-  checkAuth.notAGuest,
-  checkAuth.isAdmin,
+
   async (req, res, next) => {
     console.log(req.body)
     try {
@@ -86,8 +84,7 @@ router.put(
 
 router.post(
   '/:userId/cart',
-  checkAuth.notAGuest,
-  checkAuth.isAdmin,
+
   async (req, res, next) => {
     try {
       const order = await Order.findOrCreate({
