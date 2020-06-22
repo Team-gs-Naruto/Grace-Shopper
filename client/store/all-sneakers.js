@@ -2,12 +2,20 @@ import Axios from 'axios'
 
 // ACTION TYPES
 const SET_SNEAKERS = 'SET_SNEAKERS'
+const GET_BRAND = 'GET_BRAND'
 
 // ACTION CREATORS
 export const setSneakers = sneakers => {
   return {
     type: SET_SNEAKERS,
     sneakers
+  }
+}
+
+export const getBrand = brand => {
+  return {
+    type: GET_BRAND,
+    brand
   }
 }
 
@@ -23,11 +31,18 @@ export const fetchSneakers = () => {
   }
 }
 
+const initialState = {
+  sneakers: [],
+  brand: ''
+}
+
 // REDUCERS
-export default function sneakerReducer(state = [], action) {
+export default function sneakerReducer(state = initialState, action) {
   switch (action.type) {
     case SET_SNEAKERS:
-      return action.sneakers
+      return {...state, sneakers: action.sneakers}
+    case GET_BRAND:
+      return {...state, brand: action.brand}
     default:
       return state
   }
