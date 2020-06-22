@@ -4,13 +4,44 @@ const checkAuth = require('./permissions.middleware')
 
 module.exports = router
 
+// router.get('/', async (req, res, next) => {
+//   try {
+//     const sneakers = await Sneakers.findAll()
+//     res.json(sneakers)
+//   } catch (err) {
+//     next(err)
+//   }
+// })
+
 router.get('/', async (req, res, next) => {
   try {
     const sneakers = await Sneakers.findAll()
-    const arr = sneakers.slice(0, 12)
-    res.json(arr)
-  } catch (err) {
-    next(err)
+
+    const page = +req.query.page
+    const limit = +req.query.limit
+
+    const startIndex = (page - 1) * limit
+    const endIndex = page * limit
+
+    const results = {}
+
+    if (endIndex < sneakers.length)
+      results.next = {
+        page: page + 1,
+        limit: limit
+      }
+
+    if (startIndex > 0) {
+      results.previous = {
+        page: page - 1,
+        limit: limit
+      }
+    }
+
+    results.sneakers = sneakers.slice(startIndex, endIndex)
+    res.json(results)
+  } catch (error) {
+    next(error)
   }
 })
 

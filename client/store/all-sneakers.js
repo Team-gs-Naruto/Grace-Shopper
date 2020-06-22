@@ -12,10 +12,10 @@ export const setSneakers = sneakers => {
 }
 
 // THUNK CREATORS
-export const fetchSneakers = () => {
+export const fetchSneakers = pageNumber => {
   return async dispatch => {
     try {
-      const {data} = await Axios.get('/api/sneakers')
+      const {data} = await Axios.get(`api/sneakers?page=${pageNumber}&limit=12`)
       dispatch(setSneakers(data))
     } catch (error) {
       console.log('ERROR IN FETCHSNEAKER THUNK')

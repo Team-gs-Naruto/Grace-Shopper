@@ -3,15 +3,17 @@ import {connect} from 'react-redux'
 import ShopPageSneaker from './sneaker'
 import {Link} from 'react-router-dom'
 import {fetchSneakers} from '../store/all-sneakers'
-import {Container, Row, Col} from 'react-bootstrap'
+import {Pagination, Container, Row, Col} from 'react-bootstrap'
 
 export class AllSneakers extends React.Component {
   componentDidMount() {
-    this.props.fetchSneakers()
+    this.props.fetchSneakers(3)
   }
 
   render() {
-    const sneakers = this.props.sneakers
+    const sneakers = this.props.sneakers.sneakers
+    console.log('sneakers:', sneakers)
+    console.log('props:', this.props)
 
     return (
       <div>
@@ -20,17 +22,21 @@ export class AllSneakers extends React.Component {
         </div>
         <Container>
           <Row>
-            {sneakers.map(sneaker => (
-              <div key={sneaker.id}>
-                <Col>
-                  <Link to={`/shop/${sneaker.id}`}>
-                    <ShopPageSneaker sneaker={sneaker} />
-                  </Link>
-                </Col>
-              </div>
-            ))}
+            {sneakers &&
+              sneakers.map(sneaker => (
+                <div key={sneaker.id}>
+                  <Col>
+                    <Link to={`/shop/${sneaker.id}`}>
+                      <ShopPageSneaker sneaker={sneaker} />
+                    </Link>
+                  </Col>
+                </div>
+              ))}
           </Row>
         </Container>
+        <div>
+          <Pagination size="lg" />
+        </div>
       </div>
     )
   }
@@ -41,7 +47,7 @@ const mapState = state => ({
 })
 
 const mapDispatch = dispatch => ({
-  fetchSneakers: () => dispatch(fetchSneakers())
+  fetchSneakers: pageNumber => dispatch(fetchSneakers(pageNumber))
 })
 
 export default connect(mapState, mapDispatch)(AllSneakers)
