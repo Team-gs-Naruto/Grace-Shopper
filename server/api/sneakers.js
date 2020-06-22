@@ -25,8 +25,7 @@ router.get('/:id', async (req, res, next) => {
 
 router.put(
   '/',
-  checkAuth.notAGuest,
-  checkAuth.isAdmin,
+
   async (req, res, next) => {
     try {
       //api to create new sneaker, only accessible to admins
