@@ -3,60 +3,98 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link, Switch} from 'react-router-dom'
 import {logout} from '../store'
-import Navbar from 'react-bootstrap/Navbar'
+
+const Img = (
+  <img
+    src="https://media.giphy.com/media/dsQ0bGwVVi0aPkKo9J/giphy.gif"
+    width="80"
+    height="80"
+  />
+)
 
 const NavBar = ({handleClick, isLoggedIn, user, isAdmin}) => (
   <div>
-    <Navbar fixed="fixed" bg="dark" variant="dark">
-      <Navbar.Brand href="/homepage">
-        <img
-          alt=""
-          src="https://media.giphy.com/media/dsQ0bGwVVi0aPkKo9J/giphy.gif"
-          border="0"
-          width="30"
-          height="30"
-          className="d-inline-block align-top"
-        />{' '}
-        Sneaker Shopper
-      </Navbar.Brand>
-      {isLoggedIn ? (
-        <div>
-          {/* The navbar will show these links after you log in */}
-          <Link to="/homepage">Home</Link>
+    <div className="navbar-fixed">
+      <nav className="lighten grey 1">
+        <div className="nav-wrapper">
           &nbsp; &nbsp; &nbsp; &nbsp;
-          <a href="#" onClick={handleClick}>
-            Logout
+          <a href="/homepage" className="brand-logo">
+            {Img}
           </a>
-          &nbsp; &nbsp; &nbsp; &nbsp;
-          <Link to="/shop">Products</Link>
-          &nbsp; &nbsp; &nbsp; &nbsp;
-          {/* MAKE SURE TO USE THE USER ID ROUTE PATH IF THEY ARE LOGGED IN */}
-          <Link to={`/${user.id}/cart`}>Cart</Link>
-          &nbsp; &nbsp; &nbsp; &nbsp;
-          {isAdmin && (
-            <Switch>
-              <React.Fragment>
-                <Link to="/users">Users</Link>
-              </React.Fragment>
-            </Switch>
-          )}
+          <ul className="right hide-on-med-and-down">
+            {isLoggedIn ? (
+              <div>
+                {/* The navbar will show these links after you log in */}
+                <li className="tab">
+                  <a href="/homepage" target="_self">
+                    Home
+                  </a>
+                </li>
+                &nbsp; &nbsp; &nbsp; &nbsp;
+                <li className="tab">
+                  <a href="#" onClick={handleClick}>
+                    Logout{' '}
+                  </a>
+                </li>
+                &nbsp; &nbsp; &nbsp; &nbsp;
+                <li className="tab">
+                  <a href="/shop" target="_self">
+                    Shop
+                  </a>
+                </li>
+                &nbsp; &nbsp; &nbsp; &nbsp;
+                {/* MAKE SURE TO USE THE USER ID ROUTE PATH IF THEY ARE LOGGED IN */}
+                <li className="tab">
+                  <a href={`/${user.id}/cart`} target="_self">
+                    Cart
+                  </a>
+                </li>
+                &nbsp; &nbsp; &nbsp; &nbsp;
+                {isAdmin && (
+                  <a href="/users" target="_self">
+                    Users
+                  </a>
+                )}
+              </div>
+            ) : (
+              <div>
+                {/* The navbar will show these links before you log in */}
+                <li className="tab">
+                  <a href="/homepage" target="_self">
+                    Home
+                  </a>
+                </li>
+                &nbsp; &nbsp; &nbsp; &nbsp;
+                <li className="tab">
+                  <a href="/login" target="_self">
+                    Login
+                  </a>
+                </li>
+                &nbsp; &nbsp; &nbsp; &nbsp;
+                <li className="tab">
+                  <a href="/signup" target="_self">
+                    Sign Up
+                  </a>
+                </li>
+                &nbsp; &nbsp; &nbsp; &nbsp;
+                <li className="tab">
+                  <a href="/shop" target="_self">
+                    Shop
+                  </a>
+                </li>
+                &nbsp; &nbsp; &nbsp; &nbsp;
+                <li className="tab">
+                  <a href="/cart" target="_self">
+                    Cart
+                  </a>
+                </li>
+                &nbsp; &nbsp; &nbsp; &nbsp;
+              </div>
+            )}
+          </ul>
         </div>
-      ) : (
-        <div>
-          {/* The navbar will show these links before you log in */}
-          <Link to="/homepage">Home</Link>
-          &nbsp; &nbsp; &nbsp; &nbsp;
-          <Link to="/login">Login</Link>
-          &nbsp; &nbsp; &nbsp; &nbsp;
-          <Link to="/signup">Sign Up</Link>
-          &nbsp; &nbsp; &nbsp; &nbsp;
-          <Link to="/shop">Products</Link>
-          &nbsp; &nbsp; &nbsp; &nbsp;
-          <Link to="/cart">Cart</Link>
-          &nbsp; &nbsp; &nbsp; &nbsp;
-        </div>
-      )}
-    </Navbar>
+      </nav>
+    </div>
     <hr />
   </div>
 )

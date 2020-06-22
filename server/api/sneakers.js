@@ -7,8 +7,18 @@ module.exports = router
 router.get('/', async (req, res, next) => {
   try {
     const sneakers = await Sneakers.findAll()
-    // const arr = sneakers.slice(0, 12)
-    res.json(sneakers)
+    const arr = sneakers.slice(0, 24)
+    res.json(arr)
+  } catch (err) {
+    next(err)
+  }
+})
+
+router.get('/preview', async (req, res, next) => {
+  try {
+    const sneakers = await Sneakers.findAll()
+    const arr = sneakers.slice(42, 48)
+    res.json(arr)
   } catch (err) {
     next(err)
   }

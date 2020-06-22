@@ -15,29 +15,30 @@ export class AllSneakers extends React.Component {
 
     return (
       <div>
-        <div className="text-center">
-          <h1>All Sneakers</h1>
-        </div>
-        <div>
-          <label className="category" htmlFor="category">
-            Category
-          </label>
+        <label className="category" htmlFor="category">
+          Categories
+        </label>
+        <div className="input-field col s12">
           <select onChange={event => this.props.fetchBrand(event.target.value)}>
+            <option value="" disabled selected>
+              Choose your option
+            </option>
             <option value="">All</option>
             <option value="Nike">Nike</option>
             <option value="adidas">Adidas</option>
             <option value="Puma">Puma</option>
           </select>
         </div>
+
         <Container>
-          <Row>
+          <Row className="justify-content-md-center">
             {sneakers.map(sneaker => (
               <div key={sneaker.id}>
-                <Col>
+                <div className="col s3 m3">
                   <Link to={`/shop/${sneaker.id}`}>
                     <ShopPageSneaker sneaker={sneaker} />
                   </Link>
-                </Col>
+                </div>
               </div>
             ))}
           </Row>

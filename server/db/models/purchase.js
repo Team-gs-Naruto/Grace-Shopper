@@ -16,4 +16,6 @@ const Purchase = db.define('purchase', {
   }
 })
 
+// whenever quanitity goes down on sneaker model, quanitity goes up on user purchase
+
 module.exports = Purchase

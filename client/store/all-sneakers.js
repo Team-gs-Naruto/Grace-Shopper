@@ -20,6 +20,18 @@ export const getBrand = brand => {
 }
 
 // THUNK CREATORS
+
+export const fetchPreview = () => {
+  return async dispatch => {
+    try {
+      const {data} = await Axios.get('/api/sneakers/preview')
+      dispatch(setSneakers(data))
+    } catch (error) {
+      console.log('ERROR IN FETCHPREVIEW THUNK')
+    }
+  }
+}
+
 export const fetchSneakers = () => {
   return async dispatch => {
     try {
