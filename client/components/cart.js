@@ -4,28 +4,8 @@ import {connect} from 'react-redux'
 import Button from 'react-bootstrap/Button'
 
 export class Cart extends React.Component {
-  constructor() {
-    super()
-    this.increment = this.increment.bind()
-    this.decrement = this.decrement.bind
-  }
   componentDidMount() {
     this.props.getCart(this.props.match.params.userId || null)
-    const id = this.props.match.params.id
-  }
-  increment(item, cart) {
-    this.props.updateQty({
-      id: item.id,
-      quantity: item.quantity,
-      userId
-    })
-  }
-  decrement(item, cart) {
-    this.props.updateQty({
-      id: item.id,
-      quantity: item.quantity,
-      userId
-    })
   }
 
   render() {
@@ -53,11 +33,8 @@ export class Cart extends React.Component {
               <div>{sneaker.title}</div>
 
               <div>{sneaker.retailPrice}</div>
-              {sneaker.purchase ? (
-                <div>{sneaker.purchase.quantity}</div>
-              ) : (
-                <div>null</div>
-              )}
+
+              <div>{sneaker.quantity}</div>
             </div>
           ))
         ) : (

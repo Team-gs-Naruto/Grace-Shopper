@@ -40,9 +40,9 @@ const Sneakers = db.define('sneakers', {
     type: Sequelize.INTEGER,
     allowNull: true
   },
-  inventory: {
+  quantity: {
     type: Sequelize.INTEGER,
-    defaultValue: 10
+    defaultValue: 1
   }
 })
 // add quantity/inventory field

@@ -11,6 +11,7 @@ export class SingleSneaker extends React.Component {
 
   handleClick = sneaker => {
     this.props.addToCart(sneaker, this.props.user.id || null)
+    sneaker.quantity++
   }
 
   render() {

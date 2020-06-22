@@ -13,18 +13,5 @@ const Order = db.define('order', {
     defaultValue: 0
   }
 })
-Order.updateCart = async function(orderId, sneakerId, updatedQuantity) {
-  const cart = await Purchase.findOne({
-    where: {
-      orderId: orderId,
-      productId: productId
-    }
-  })
-  const sneaker = await Sneaker.findByPk(sneakerId)
-
-  await cart.update({
-    quantity: updatedQuantity
-  })
-}
 
 module.exports = Order

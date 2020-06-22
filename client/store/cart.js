@@ -25,21 +25,6 @@ export const getCart = cart => ({
   cart
 })
 
-const increment = id => ({
-  type: INCREMENT,
-  id
-})
-
-const decrement = id => ({
-  type: DECREMENT,
-  id
-})
-
-const updateQty = updated => ({
-  type: UPDATE_QTY,
-  updated
-})
-
 // THUNK CREATORS
 export const addSneakerToCartThunk = (sneaker, userId) => {
   return async dispatch => {
@@ -128,15 +113,6 @@ export const removeSneakerThunk = (userId, sneakerId) => {
   }
 }
 
-export const updateQtyThunk = updated => async dispatch => {
-  try {
-    const {data} = await axios.put(`/api/cart/${updated.id}`, updated)
-    dispatch(updateQty(data))
-  } catch (err) {
-    console.error(err)
-  }
-}
-
 //REDUCER
 const initialState = []
 
@@ -150,16 +126,6 @@ export default function cartReducer(state = initialState, action) {
     }
     case GET_CART: {
       return action.cart
-    }
-    case UPDATE_QTY: {
-      const updatedCart = state.map(cart => {
-        if (cart.id === action.cart.id) {
-          return action.updated
-        } else {
-          return cart
-        }
-      })
-      return updatedCart
     }
     default:
       return state

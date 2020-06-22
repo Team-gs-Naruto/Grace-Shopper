@@ -84,7 +84,7 @@ router.post('/:userId/cart', async (req, res, next) => {
     }).spread(foundOrCreatedOrder => {
       return Purchase.findOrCreate({
         where: {
-          quantity: 1,
+          quantity: +1,
           orderId: +foundOrCreatedOrder.id,
           sneakerId: +req.body.sneakerId,
           priceAtPurchase: +req.body.sneakerPrice
@@ -122,26 +122,5 @@ router.delete('/:userId/cart', async (req, res, next) => {
     res.json(purchase)
   } catch (err) {
     next(err)
-  }
-})
-
-router.put('/:userId/cart/:action', async (req, res, next) => {
-  try {
-    const {sneakerId, orderId} = req.body
-    const orderItem = await Purchase.findOne({
-      where: {
-        sneakerId: sneakerId,
-        orderId: orderId
-      }
-    })
-    if (req.params.action === 'add') {
-      await orderItem.increment('quantity')
-    }
-    if (req.params.action === 'remove') {
-      await orderItem.decrement('quantity')
-    }
-    res.json(orderItem)
-  } catch (error) {
-    next(error)
   }
 })
