@@ -6,7 +6,8 @@ Come shop at out sneaker e-commerce store! We have the latest styles available, 
 sneakershopper.herokuapp.com/shop
 
 ### Set up
-Clone this to your repo. In your terminal run 
+
+Clone this to your repo. In your terminal run
 
 `npm install`
 `npm run seed`
@@ -15,7 +16,3 @@ Clone this to your repo. In your terminal run
 ### Running tests
 
 `npm test`
-
-
-
-

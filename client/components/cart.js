@@ -2,7 +2,7 @@ import React from 'react'
 import {removeSneakerThunk, getCartThunk, getQuantityThunk} from '../store/cart'
 import {connect} from 'react-redux'
 import Button from 'react-bootstrap/Button'
-
+import CartTotal from './cart-total'
 export class Cart extends React.Component {
   componentDidMount() {
     this.props.getCart(this.props.user.id || null)
@@ -16,53 +16,51 @@ export class Cart extends React.Component {
 
   render() {
     const {user, cart, removeSneaker} = this.props
-
     return (
       <div>
         {cart.length ? (
-          cart.map(sneaker => (
-            <div key={sneaker.id}>
-              <div>
-                <Button
-                  type="button"
-                  variant="danger"
-                  onClick={() => removeSneaker(user.id, sneaker.id)}
-                >
-                  Remove
-                </Button>
+          <div>
+            {cart.map(sneaker => (
+              <div key={sneaker.id}>
+                <div>
+                  <Button
+                    type="button"
+                    variant="danger"
+                    onClick={() => removeSneaker(user.id, sneaker.id)}
+                  >
+                    Remove
+                  </Button>
+                </div>
+                <div>
+                  <img src={sneaker.media} />
+                </div>
+                <div>
+                  <label className="quantity" htmlFor="quantity">
+                    Edit Quantity
+                  </label>
+                  <select
+                    value={sneaker.purchase.quantity}
+                    onChange={event =>
+                      this.props.getQuantity(
+                        user.id,
+                        sneaker.id,
+                        event.target.value
+                      )
+                    }
+                  >
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                  </select>
+                </div>
+                <div>{sneaker.title}</div>
+                <div>{sneaker.retailPrice}</div>
               </div>
-
-              <div>
-                <img src={sneaker.media} />
-              </div>
-
-              <div>
-                <label className="quantity" htmlFor="quantity">
-                  Edit Quantity
-                </label>
-                <select
-                  value={sneaker.purchase.quantity}
-                  onChange={event =>
-                    this.props.getQuantity(
-                      user.id,
-                      sneaker.id,
-                      event.target.value
-                    )
-                  }
-                >
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5</option>
-                </select>
-              </div>
-
-              <div>{sneaker.title}</div>
-
-              <div>{sneaker.retailPrice}</div>
-            </div>
-          ))
+            ))}
+            <CartTotal />
+          </div>
         ) : (
           <div>
             <h3 className="text-center">Your cart is empty</h3>

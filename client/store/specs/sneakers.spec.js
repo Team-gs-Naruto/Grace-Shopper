@@ -50,27 +50,7 @@ describe('Sneakers thunks', () => {
   afterEach(() => {
     mockAxios.restore()
   })
-  describe('GET /sneakers', () => {
-    beforeEach(() => {
-      mockAxios
-        .onGet('/api/sneakers')
-        .reply(200, [
-          {id: 1, brand: 'Nike'},
-          {id: 2, brand: 'Jordan'},
-          {id: 3, brand: 'Adidas'}
-        ])
-    })
 
-    it('sets the received sneakers to the state', async () => {
-      await store.dispatch(fetchSneakers())
-      const state = store.getState()
-      expect(state.allSneakers).to.deep.equal([
-        {id: 1, brand: 'Nike'},
-        {id: 2, brand: 'Jordan'},
-        {id: 3, brand: 'Adidas'}
-      ])
-    })
-  })
   describe('GET /sneakers/:id', () => {
     beforeEach(() => {
       mockAxios.onGet('/api/sneakers/1').reply(200, [{id: 1, brand: 'Nike'}])
