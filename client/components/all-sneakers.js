@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import ShopPageSneaker from './sneaker'
 import {Link} from 'react-router-dom'
 import {fetchSneakers, getBrand} from '../store/all-sneakers'
-import {Container, Row, Col} from 'react-bootstrap'
+import {Container, Row, Col, ButtonGroup, Button} from 'react-bootstrap'
 
 export class AllSneakers extends React.Component {
   componentDidMount() {
@@ -15,23 +15,40 @@ export class AllSneakers extends React.Component {
 
     return (
       <div>
-        <label className="category" htmlFor="category">
-          Categories
-        </label>
-        <div className="input-field col s12">
-          <select onChange={event => this.props.fetchBrand(event.target.value)}>
-            <option value="" disabled selected>
-              Choose your option
-            </option>
-            <option value="">All</option>
-            <option value="Nike">Nike</option>
-            <option value="adidas">Adidas</option>
-            <option value="Puma">Puma</option>
-          </select>
-        </div>
-
+        <Container className="center">
+          <ButtonGroup aria-label="Basic example">
+            <Button className="lighten grey 1" variant="secondary" href="/shop">
+              All
+            </Button>
+            <Button
+              className="lighten grey 1"
+              variant="secondary"
+              onClick={event => this.props.fetchBrand('Nike')}
+            >
+              Nike
+            </Button>
+            <Button
+              className="lighten grey 1"
+              variant="secondary"
+              onClick={event => this.props.fetchBrand('adidas')}
+            >
+              Adidas
+            </Button>
+            <Button
+              className="lighten grey 1"
+              variant="secondary"
+              onClick={event => this.props.fetchBrand('Puma')}
+            >
+              Puma
+            </Button>
+          </ButtonGroup>
+        </Container>
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+        &nbsp; &nbsp;
         <Container>
           <Row className="justify-content-md-center">
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+            &nbsp; &nbsp; &nbsp;
             {sneakers.map(sneaker => (
               <div key={sneaker.id}>
                 <div className="col s3 m3">

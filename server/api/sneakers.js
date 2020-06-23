@@ -7,8 +7,7 @@ module.exports = router
 router.get('/', async (req, res, next) => {
   try {
     const sneakers = await Sneakers.findAll()
-    const arr = sneakers.slice(0, 24)
-    res.json(arr)
+    res.json(sneakers)
   } catch (err) {
     next(err)
   }
