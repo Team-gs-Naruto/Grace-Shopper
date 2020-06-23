@@ -12,7 +12,7 @@ const Img = (
   />
 )
 
-const NavBar = ({handleClick, isLoggedIn, user, isAdmin}) => (
+const NavBar = ({handleClick, isLoggedIn, isAdmin}) => (
   <div>
     <div className="navbar-fixed">
       <nav className="lighten grey 1">
@@ -45,7 +45,7 @@ const NavBar = ({handleClick, isLoggedIn, user, isAdmin}) => (
                 &nbsp; &nbsp; &nbsp; &nbsp;
                 {/* MAKE SURE TO USE THE USER ID ROUTE PATH IF THEY ARE LOGGED IN */}
                 <li className="tab">
-                  <a href={`/${user.id}/cart`} target="_self">
+                  <a href="/cart" target="_self">
                     Cart
                   </a>
                 </li>
@@ -107,10 +107,7 @@ const NavBar = ({handleClick, isLoggedIn, user, isAdmin}) => (
 const mapState = state => {
   return {
     isLoggedIn: !!state.user.id,
-    isAdmin: state.user.isAdmin,
-    user: state.user,
-    cart: state.cart,
-    userId: state.user.id
+    isAdmin: state.user.isAdmin
   }
 }
 

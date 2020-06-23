@@ -10,11 +10,17 @@ import Button from 'react-bootstrap/Button'
 
 export class Cart extends React.Component {
   componentDidMount() {
-    this.props.getCart(this.props.match.params.userId || null)
+    this.props.getCart(this.props.user.id || null)
+  }
+
+  componentDidUpdate(prevState) {
+    if (prevState.user.id !== this.props.user.id) {
+      this.props.getCart(this.props.user.id || null)
+    }
   }
   handleClick() {}
   render() {
-    const {cart, removeSneaker, user} = this.props
+    const {user, cart, removeSneaker} = this.props
 
     return (
       <div>
@@ -72,8 +78,8 @@ export class Cart extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  cart: state.cart,
-  user: state.user
+  user: state.user,
+  cart: state.cart
 })
 
 const mapDispatchToProps = dispatch => ({

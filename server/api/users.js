@@ -129,7 +129,7 @@ router.put('/:userId/cart', async (req, res, next) => {
   try {
     const order = await Order.findOne({
       where: {
-        userId: req.body.userId,
+        userId: +req.params.userId,
         isComplete: false
       }
     })
