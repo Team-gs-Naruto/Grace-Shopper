@@ -12,17 +12,7 @@ export class Cart extends React.Component {
   componentDidMount() {
     this.props.getCart(this.props.match.params.userId || null)
   }
-  handleClick(event, sneaker) {
-    const userId = user.id
-    const sneakerId = sneaker.id
-    const click = event.target.value
-    event.preventDefault()
-    if (click === 'increment') {
-      this.props.incrementThunk(sneakerId, userId)
-    } else if (click === 'decrement') {
-      this.props.decrementThunk(sneakerId, userId)
-    }
-  }
+  handleClick() {}
   render() {
     const {cart, removeSneaker, user} = this.props
 
