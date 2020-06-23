@@ -1,15 +1,21 @@
-SNEAKER SHOPPER
+# SNEAKER SHOPPER
 
-by Soham Dutta, Alex Bangiyev, Charlies Pan, Chislaine Cruz
+Soham Dutta, Alex Bangiyev, Charlies Pan, Chislaine Cruz
 
-to begin, clone this to your repo
+Come shop at out sneaker e-commerce store! We have the latest styles available, so come get them while they're still in-stock.
+sneakershopper.herokuapp.com/shop
 
-in your terminal simply -
+### Set up
+Clone this to your repo. In your terminal run 
 
-npm install
-npm run seed
-npm run start-dev
+`npm install`
+`npm run seed`
+`npm run start-dev`
 
-Enjoy 😃
+### Running tests
+
+`npm test`
+
+
 
 
