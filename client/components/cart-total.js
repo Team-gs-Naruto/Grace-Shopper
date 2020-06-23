@@ -6,7 +6,7 @@ const reduceCart = cart => {
   let price = cart.map(item => item.retailPrice)
   let total = 0
   for (let i = 0; i < quantities.length; i++) {
-    total += quantities[i] * price[i]
+    total += +quantities[i] * +price[i]
   }
   return total
 }
@@ -14,9 +14,11 @@ const reduceCart = cart => {
 const CartTotal = props => {
   const {cartItems, isLoggedIn} = props
   let total
-
   if (isLoggedIn) {
     total = reduceCart(cartItems)
+  } else {
+    const cartArr = JSON.parse(localStorage.getItem('cart'))
+    total = reduceCart(cartArr)
   }
   return (
     <div>
@@ -24,10 +26,12 @@ const CartTotal = props => {
     </div>
   )
 }
+
 const mapState = state => {
   return {
     isLoggedIn: !!state.user.id,
     cartItems: state.cart
   }
 }
+
 export default connect(mapState)(CartTotal)
