@@ -10,7 +10,14 @@ const REMOVE_USER = 'REMOVE_USER'
 /**
  * INITIAL STATE
  */
-const defaultUser = {}
+const defaultUser = {
+  id: null,
+  email: '',
+  isAdmin: false,
+  googleId: null,
+  createdAt: '',
+  updatedAt: ''
+}
 
 /**
  * ACTION CREATORS
