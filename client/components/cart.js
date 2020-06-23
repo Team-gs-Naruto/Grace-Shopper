@@ -2,6 +2,7 @@ import React from 'react'
 import {removeSneakerThunk, getCartThunk} from '../store/cart'
 import {connect} from 'react-redux'
 import Button from 'react-bootstrap/Button'
+import CartTotal from './cart-total'
 
 export class Cart extends React.Component {
   componentDidMount() {
@@ -39,6 +40,7 @@ export class Cart extends React.Component {
               <div>{sneaker.title}</div>
 
               <div>{sneaker.retailPrice}</div>
+              <CartTotal />
             </div>
           ))
         ) : (
