@@ -40,83 +40,70 @@ router.get(
   }
 )
 
-router.get(
-  '/:userId/cart',
+router.get('/:userId/cart', async (req, res, next) => {
+  try {
+    const order = await Order.findOne({
+      where: {
+        userId: +req.params.userId,
+        isComplete: false
+      },
+      include: {all: true, nested: true}
+    })
 
-  async (req, res, next) => {
-    try {
-      const order = await Order.findOne({
-        where: {
-          userId: +req.params.userId,
-          isComplete: false
-        },
-        include: {all: true, nested: true}
-      })
-
-      res.json(order)
-    } catch (err) {
-      next(err)
-    }
+    res.json(order)
+  } catch (err) {
+    next(err)
   }
-)
+})
 
-router.put(
-  '/:id',
+router.put('/:id', async (req, res, next) => {
+  console.log(req.body)
+  try {
+    const user = await User.findOne({
+      where: {
+        id: req.params.id
+      }
+    })
 
-  async (req, res, next) => {
-    console.log(req.body)
-    try {
-      const user = await User.findOne({
+    user.isAdmin = req.body.isAdmin
+    await user.save()
+
+    res.json(user)
+  } catch (err) {
+    next(err)
+  }
+})
+
+router.post('/:userId/cart', async (req, res, next) => {
+  try {
+    const order = await Order.findOrCreate({
+      where: {
+        userId: +req.params.userId,
+        isComplete: false
+      }
+    }).spread(foundOrCreatedOrder => {
+      return Purchase.findOrCreate({
         where: {
-          id: req.params.id
+          quantity: 1,
+          orderId: +foundOrCreatedOrder.id,
+          sneakerId: +req.body.sneakerId,
+          priceAtPurchase: +req.body.sneakerPrice
         }
       })
+    })
+    const findOrder = await Order.findOne({
+      where: {
+        userId: +req.params.userId,
+        isComplete: false
+      },
+      include: {all: true, nested: true}
+    })
 
-      user.isAdmin = req.body.isAdmin
-      await user.save()
-
-      res.json(user)
-    } catch (err) {
-      next(err)
-    }
+    res.json(findOrder)
+  } catch (err) {
+    next(err)
   }
-)
-
-router.post(
-  '/:userId/cart',
-
-  async (req, res, next) => {
-    try {
-      const order = await Order.findOrCreate({
-        where: {
-          userId: +req.params.userId,
-          isComplete: false
-        }
-      }).spread(foundOrCreatedOrder => {
-        return Purchase.findOrCreate({
-          where: {
-            quantity: 1,
-            orderId: +foundOrCreatedOrder.id,
-            sneakerId: +req.body.sneakerId,
-            priceAtPurchase: +req.body.sneakerPrice
-          }
-        })
-      })
-
-      const findOrder = await Order.findOne({
-        where: {
-          userId: +req.params.userId,
-          isComplete: false
-        },
-        include: {all: true, nested: true}
-      })
-
-      res.json(findOrder)
-    } catch (err) {
-      next(err)
-    }
-  }
-)
+})
 
 router.delete('/:userId/cart', async (req, res, next) => {
   try {
@@ -132,6 +119,26 @@ router.delete('/:userId/cart', async (req, res, next) => {
         orderId: order.id
       }
     })
+    res.json(purchase)
+  } catch (err) {
+    next(err)
+  }
+})
+
+router.put('/:userId/cart/:action', async (req, res, next) => {
+  try {
+    const purchase = await Purchase.findOne({
+      where: {
+        sneakerId: +req.body.sneakerId,
+        orderId: +req.body.orderId
+      }
+    })
+    if (req.params.action === 'increment') {
+      await purchase.increment('quantity', {by: 1})
+    }
+    if (req.params.action === 'decrement') {
+      await purchase.decrement('quantity', {by: 1})
+    }
     res.json(purchase)
   } catch (err) {
     next(err)

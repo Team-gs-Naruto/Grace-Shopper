@@ -2,12 +2,12 @@ import React from 'react'
 import {connect} from 'react-redux'
 import ShopPageSneaker from './sneaker'
 import {Link} from 'react-router-dom'
-import {fetchSneakers, getBrand} from '../store/all-sneakers'
+import {fetchPreview, getBrand} from '../store/all-sneakers'
 import {Container, Row, Col} from 'react-bootstrap'
 
-export class AllSneakers extends React.Component {
+export class Preview extends React.Component {
   componentDidMount() {
-    this.props.fetchSneakers()
+    this.props.fetchPreview()
   }
 
   render() {
@@ -15,21 +15,6 @@ export class AllSneakers extends React.Component {
 
     return (
       <div>
-        <label className="category" htmlFor="category">
-          Categories
-        </label>
-        <div className="input-field col s12">
-          <select onChange={event => this.props.fetchBrand(event.target.value)}>
-            <option value="" disabled selected>
-              Choose your option
-            </option>
-            <option value="">All</option>
-            <option value="Nike">Nike</option>
-            <option value="adidas">Adidas</option>
-            <option value="Puma">Puma</option>
-          </select>
-        </div>
-
         <Container>
           <Row className="justify-content-md-center">
             {sneakers.map(sneaker => (
@@ -63,8 +48,8 @@ const mapState = state => {
 }
 
 const mapDispatch = dispatch => ({
-  fetchSneakers: () => dispatch(fetchSneakers()),
+  fetchPreview: () => dispatch(fetchPreview()),
   fetchBrand: brand => dispatch(getBrand(brand))
 })
 
-export default connect(mapState, mapDispatch)(AllSneakers)
+export default connect(mapState, mapDispatch)(Preview)

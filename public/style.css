@@ -38,3 +38,17 @@ form div {
   justify-content: space-between;
   flex-wrap: wrap;
 }
+
+.cardHolder {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-flow: row wrap;
+  width: 100%;
+}
+
+.cardHolder div {
+  width: calc(100% / 3);
+  padding: 0;
+  margin: 0;
+}

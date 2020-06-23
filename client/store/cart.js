@@ -7,6 +7,8 @@ const REMOVE_SNEAKER_FROM_CART = 'REMOVE_SNEAKER_FROM_CART'
 
 const GET_CART = 'GET_CART'
 
+const UPDATE_QTY = 'UPDATE_QTY'
+
 // ACTION CREATORS
 const addSneakerToCart = item => ({
   type: ADD_SNEAKER_TO_CART,
@@ -49,7 +51,7 @@ export const addSneakerToCartThunk = (sneaker, userId) => {
           }
         })
 
-        if (alreadyInCart === false) {
+        if (alreadyInCart === true) {
           cartArr.push(sneaker)
         }
         localStorage.setItem('cart', JSON.stringify(cartArr))
@@ -116,12 +118,15 @@ const initialState = []
 
 export default function cartReducer(state = initialState, action) {
   switch (action.type) {
-    case ADD_SNEAKER_TO_CART:
+    case ADD_SNEAKER_TO_CART: {
       return action.item
-    case REMOVE_SNEAKER_FROM_CART:
+    }
+    case REMOVE_SNEAKER_FROM_CART: {
       return state.filter(sneaker => sneaker.id !== action.id)
-    case GET_CART:
+    }
+    case GET_CART: {
       return action.cart
+    }
     default:
       return state
   }

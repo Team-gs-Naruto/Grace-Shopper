@@ -11,7 +11,8 @@ import {
   SingleSneaker,
   Cart,
   AllUsers,
-  SingleUser
+  SingleUser,
+  Preview
 } from './components'
 import {me} from './store'
 
@@ -43,6 +44,7 @@ class Routes extends Component {
               <Switch>
                 <Route exact path="/users" component={AllUsers} />
                 <Route exact path="/users/:id" component={SingleUser} />
+                <Route exact path="/preview" component={Preview} />
               </Switch>
             )}
           </Switch>
