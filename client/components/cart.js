@@ -1,8 +1,10 @@
 import React from 'react'
 import {removeSneakerThunk, getCartThunk, getQuantityThunk} from '../store/cart'
 import {connect} from 'react-redux'
-import Button from 'react-bootstrap/Button'
+import {Button, Container} from 'react-bootstrap'
 import CartTotal from './cart-total'
+import M from 'materialize-css'
+
 export class Cart extends React.Component {
   componentDidMount() {
     this.props.getCart(this.props.user.id || null)
@@ -13,17 +15,45 @@ export class Cart extends React.Component {
       this.props.getCart(this.props.user.id || null)
     }
   }
-
   render() {
     const {user, cart, removeSneaker} = this.props
     return (
       <div>
-        {cart.length ? (
-          <div>
-            {cart.map(sneaker => (
-              <div key={sneaker.id}>
-                <div>
+        <Container xs={1}>
+          {cart.length ? (
+            <div>
+              {cart.map(sneaker => (
+                <div key={sneaker.id}>
+                  <div />
+                  <div>
+                    <img src={sneaker.media} />
+                  </div>
+                  <div>
+                    <label htmlFor="quantity" className="center">
+                      Edit Quantity
+                    </label>
+                    <select
+                      className="browser-default"
+                      value={sneaker.purchase.quantity}
+                      onChange={event =>
+                        this.props.getQuantity(
+                          user.id,
+                          sneaker.id,
+                          event.target.value
+                        )
+                      }
+                    >
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                    </select>
+                  </div>
+                  <div>{sneaker.title}</div>
+                  <div>{sneaker.retailPrice}</div>
                   <Button
+                    className="center"
                     type="button"
                     variant="danger"
                     onClick={() => removeSneaker(user.id, sneaker.id)}
@@ -31,41 +61,24 @@ export class Cart extends React.Component {
                     Remove
                   </Button>
                 </div>
-                <div>
-                  <img src={sneaker.media} />
+              ))}
+              <div className="col s12 l3 center">
+                <div className="card">
+                  <div className="card-content">
+                    <span className="card-title center center">
+                      {' '}
+                      <CartTotal />
+                    </span>
+                  </div>
                 </div>
-                <div>
-                  <label className="quantity" htmlFor="quantity">
-                    Edit Quantity
-                  </label>
-                  <select
-                    value={sneaker.purchase.quantity}
-                    onChange={event =>
-                      this.props.getQuantity(
-                        user.id,
-                        sneaker.id,
-                        event.target.value
-                      )
-                    }
-                  >
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                  </select>
-                </div>
-                <div>{sneaker.title}</div>
-                <div>{sneaker.retailPrice}</div>
               </div>
-            ))}
-            <CartTotal />
-          </div>
-        ) : (
-          <div>
-            <h3 className="text-center">Your cart is empty</h3>
-          </div>
-        )}
+            </div>
+          ) : (
+            <div className="container center">
+              <h3 className="text-center">Your cart is empty</h3>
+            </div>
+          )}
+        </Container>
       </div>
     )
   }

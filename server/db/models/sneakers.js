@@ -40,8 +40,13 @@ const Sneakers = db.define('sneakers', {
   year: {
     type: Sequelize.INTEGER,
     allowNull: true
+  },
+  inventory: {
+    type: Sequelize.INTEGER,
+    defaultValue: 10
   }
 })
+// add quantity/inventory field
 
 Sneakers.beforeCreate(function(sneaker) {
   if (sneaker.retailPrice === 0 || sneaker.retailPrice === null) {

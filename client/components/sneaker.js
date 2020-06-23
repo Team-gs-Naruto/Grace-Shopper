@@ -1,16 +1,21 @@
 import React from 'react'
-import Card from 'react-bootstrap/Card'
 
 const ShopPageSneaker = props => {
   const {sneaker} = props
   return (
-    <Card style={{width: '18rem'}}>
-      <Card.Img variant="top" src={sneaker.media} />
-      <Card.Body>
-        <Card.Title>Title: {sneaker.title}</Card.Title>
-        <Card.Text>Price: {sneaker.retailPrice}</Card.Text>
-      </Card.Body>
-    </Card>
+    <div className="card hoverable medium">
+      <div className="card-image responsive-media">
+        <img src={sneaker.media} />
+      </div>
+      <div className="card-content">
+        <p className="card-text center black-text">{sneaker.title}</p>
+        {Number(sneaker.retailPrice) ? (
+          <h6 className="center black-text">${sneaker.retailPrice}</h6>
+        ) : (
+          <h6 className="center black-text">Sold Out</h6>
+        )}
+      </div>
+    </div>
   )
 }
 

@@ -152,12 +152,15 @@ const initialState = []
 
 export default function cartReducer(state = initialState, action) {
   switch (action.type) {
-    case ADD_SNEAKER_TO_CART:
+    case ADD_SNEAKER_TO_CART: {
       return action.item
-    case REMOVE_SNEAKER_FROM_CART:
+    }
+    case REMOVE_SNEAKER_FROM_CART: {
       return state.filter(sneaker => sneaker.id !== action.id)
-    case GET_CART:
+    }
+    case GET_CART: {
       return action.cart
+    }
     case GET_QUANTITY: {
       return state.map(sneaker => {
         if (sneaker.id === action.sneaker.sneakerId) {
