@@ -4,6 +4,7 @@ import {withRouter, Route, Switch} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import {
   HomePage,
+  Preview,
   Login,
   Signup,
   UserHome,
@@ -43,6 +44,7 @@ class Routes extends Component {
               <Switch>
                 <Route exact path="/users" component={AllUsers} />
                 <Route exact path="/users/:id" component={SingleUser} />
+                <Route exact path="/preview" component={Preview} />
               </Switch>
             )}
           </Switch>

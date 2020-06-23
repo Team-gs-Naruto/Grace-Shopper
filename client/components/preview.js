@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import ShopPageSneaker from './sneaker'
 import {Link} from 'react-router-dom'
 import {fetchPreview} from '../store/all-sneakers'
-import {Row, Col, Container} from 'react-bootstrap'
+import {Row, Container} from 'react-bootstrap'
 
 export class Preview extends React.Component {
   componentDidMount() {
