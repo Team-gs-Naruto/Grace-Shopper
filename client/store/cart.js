@@ -25,6 +25,12 @@ export const getCart = cart => ({
   cart
 })
 
+export const updateQty = (itemId, quantity) => ({
+  type: UPDATE_QTY,
+  itemId,
+  quantity
+})
+
 // THUNK CREATORS
 export const addSneakerToCartThunk = (sneaker, userId) => {
   return async dispatch => {
@@ -51,7 +57,7 @@ export const addSneakerToCartThunk = (sneaker, userId) => {
           }
         })
 
-        if (alreadyInCart === true) {
+        if (alreadyInCart === false) {
           cartArr.push(sneaker)
         }
         localStorage.setItem('cart', JSON.stringify(cartArr))
@@ -117,6 +123,7 @@ export const removeSneakerThunk = (userId, sneakerId) => {
 const initialState = []
 
 export default function cartReducer(state = initialState, action) {
+  let newState
   switch (action.type) {
     case ADD_SNEAKER_TO_CART: {
       return action.item
@@ -127,6 +134,18 @@ export default function cartReducer(state = initialState, action) {
     case GET_CART: {
       return action.cart
     }
+    case UPDATE_QTY: {
+      const findSneaker = state.findIndex(sneaker => sneaker.id === action.id)
+      if (action.quantity > 0) {
+        state[findSneaker].quantity = action.quantity
+        newState = state
+      } else {
+        newState = state.filter(sneaker => sneaker.id !== action.id)
+      }
+      localStorage.setItem('cart', JSON.stringify(newState))
+      return newState
+    }
+
     default:
       return state
   }
