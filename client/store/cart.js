@@ -9,6 +9,8 @@ const GET_CART = 'GET_CART'
 
 const GET_QUANTITY = 'GET_QUANTITY'
 
+const CLEAR_CART = 'CLEAR_CART'
+
 // ACTION CREATORS
 export const addSneakerToCart = item => ({
   type: ADD_SNEAKER_TO_CART,
@@ -28,6 +30,11 @@ export const getCart = cart => ({
 export const getQuantity = sneaker => ({
   type: GET_QUANTITY,
   sneaker
+})
+
+export const clearCart = orderId => ({
+  type: CLEAR_CART,
+  orderId
 })
 
 // THUNK CREATORS
@@ -147,6 +154,17 @@ export const getQuantityThunk = (userId, sneakerId, quantity) => {
   }
 }
 
+export const clearingCart = orderId => {
+  return async dispatch => {
+    try {
+      const {data} = await axios.put(`/api/users/cart`, {orderId: orderId})
+      dispatch(clearCart(data))
+    } catch (err) {
+      console.log('ERROR IN GET CLEARING CART THUNK')
+    }
+  }
+}
+
 //REDUCER
 const initialState = []
 
@@ -172,6 +190,8 @@ export default function cartReducer(state = initialState, action) {
         return sneaker
       })
     }
+    case CLEAR_CART:
+      return state
     default:
       return state
   }

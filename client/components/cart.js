@@ -3,6 +3,7 @@ import {removeSneakerThunk, getCartThunk, getQuantityThunk} from '../store/cart'
 import {connect} from 'react-redux'
 import Button from 'react-bootstrap/Button'
 import CartTotal from './cart-total'
+import {Link} from 'react-router-dom'
 export class Cart extends React.Component {
   componentDidMount() {
     this.props.getCart(this.props.user.id || null)
@@ -60,6 +61,9 @@ export class Cart extends React.Component {
               </div>
             ))}
             <CartTotal />
+            <Link to="/cart/checkout">
+              <button type="button">Checkout</button>
+            </Link>
           </div>
         ) : (
           <div>

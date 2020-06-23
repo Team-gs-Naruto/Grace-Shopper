@@ -11,7 +11,9 @@ import {
   SingleSneaker,
   Cart,
   AllUsers,
-  SingleUser
+  SingleUser,
+  Form,
+  ThankYou
 } from './components'
 import {me} from './store'
 
@@ -32,13 +34,17 @@ class Routes extends Component {
         <Route path="/homepage" component={HomePage} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
+        <Route exact path="/cart/checkout" component={Form} />
         <Route path="/cart" component={Cart} />
         <Route exact path="/shop" component={AllSneakers} />
         <Route exact path="/shop/:id" component={SingleSneaker} />
+        <Route path="/thankyou" component={ThankYou} />
+
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
             <Route exact path="/home" component={UserHome} />
+
             {isAdmin && (
               <Switch>
                 <Route exact path="/users" component={AllUsers} />
