@@ -1,10 +1,5 @@
 import React from 'react'
-import {
-  incrementThunk,
-  decrementThunk,
-  removeSneakerThunk,
-  getCartThunk
-} from '../store/cart'
+import {updateQty, removeSneakerThunk, getCartThunk} from '../store/cart'
 import {connect} from 'react-redux'
 import Button from 'react-bootstrap/Button'
 
