@@ -7,6 +7,8 @@ const REMOVE_SNEAKER_FROM_CART = 'REMOVE_SNEAKER_FROM_CART'
 
 const GET_CART = 'GET_CART'
 
+const GET_QUANTITY = 'GET_QUANTITY'
+
 // ACTION CREATORS
 const addSneakerToCart = item => ({
   type: ADD_SNEAKER_TO_CART,
@@ -23,6 +25,11 @@ export const getCart = cart => ({
   cart
 })
 
+export const getQuantity = sneaker => ({
+  type: GET_QUANTITY,
+  sneaker
+})
+
 // THUNK CREATORS
 export const addSneakerToCartThunk = (sneaker, userId) => {
   return async dispatch => {
@@ -35,7 +42,10 @@ export const addSneakerToCartThunk = (sneaker, userId) => {
         dispatch(addSneakerToCart(data.sneakers))
       } else if (!userId && !localStorage.getItem('cart')) {
         // If I am a guest and there are no items in localstorage cart
-        localStorage.setItem('cart', JSON.stringify([sneaker]))
+        localStorage.setItem(
+          'cart',
+          JSON.stringify([{...sneaker, purchase: {quantity: 1}}])
+        )
         const cartArr = JSON.parse(localStorage.getItem('cart'))
         dispatch(addSneakerToCart(cartArr))
       } else {
@@ -50,7 +60,7 @@ export const addSneakerToCartThunk = (sneaker, userId) => {
         })
 
         if (alreadyInCart === false) {
-          cartArr.push(sneaker)
+          cartArr.push({...sneaker, purchase: {quantity: 1}})
         }
         localStorage.setItem('cart', JSON.stringify(cartArr))
         const newCartArr = JSON.parse(localStorage.getItem('cart'))
@@ -111,6 +121,32 @@ export const removeSneakerThunk = (userId, sneakerId) => {
   }
 }
 
+export const getQuantityThunk = (userId, sneakerId, quantity) => {
+  return async dispatch => {
+    try {
+      if (userId) {
+        const {data} = await axios.put(`/api/users/${userId}/cart`, {
+          sneakerId,
+          quantity
+        })
+        dispatch(getQuantity(data))
+      } else {
+        let cartArr = JSON.parse(localStorage.getItem('cart'))
+        const newLocalStorageState = cartArr.map(sneaker => {
+          if (sneaker.id === sneakerId) {
+            sneaker.purchase.quantity = +quantity
+          }
+          return sneaker
+        })
+        localStorage.setItem('cart', JSON.stringify(newLocalStorageState))
+        dispatch(getQuantity({sneakerId, quantity}))
+      }
+    } catch (err) {
+      console.log('ERROR IN GET QUANTITY THUNK')
+    }
+  }
+}
+
 //REDUCER
 const initialState = []
 
@@ -122,6 +158,20 @@ export default function cartReducer(state = initialState, action) {
       return state.filter(sneaker => sneaker.id !== action.id)
     case GET_CART:
       return action.cart
+    case GET_QUANTITY: {
+      return state.map(sneaker => {
+        if (sneaker.id === action.sneaker.sneakerId) {
+          return {
+            ...sneaker,
+            purchase: {
+              ...sneaker.purchase,
+              quantity: +action.sneaker.quantity
+            }
+          }
+        }
+        return sneaker
+      })
+    }
     default:
       return state
   }
