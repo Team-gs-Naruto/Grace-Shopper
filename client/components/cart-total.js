@@ -3,9 +3,9 @@ import {connect} from 'react-redux'
 
 const CartTotal = props => {
   const {cartItems, isLoggedIn} = props
-  console.log(cartItems)
-  // if (isLoggedIn) {
-  // }
+  if (isLoggedIn) {
+    console.log('cart items:', cartItems)
+  }
 
   return (
     <div>
@@ -16,7 +16,8 @@ const CartTotal = props => {
 
 const mapState = state => {
   return {
-    isLoggedIn: !!state.user.id
+    isLoggedIn: !!state.user.id,
+    cartItems: state.cart
   }
 }
 

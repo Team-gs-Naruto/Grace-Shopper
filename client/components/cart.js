@@ -2,14 +2,21 @@ import React from 'react'
 import {removeSneakerThunk, getCartThunk} from '../store/cart'
 import {connect} from 'react-redux'
 import Button from 'react-bootstrap/Button'
+import CartTotal from './cart-total'
 
 export class Cart extends React.Component {
   componentDidMount() {
-    this.props.getCart(this.props.match.params.userId || null)
+    this.props.getCart(this.props.user.id || null)
+  }
+
+  componentDidUpdate(prevState) {
+    if (prevState.user.id !== this.props.user.id) {
+      this.props.getCart(this.props.user.id || null)
+    }
   }
 
   render() {
-    const {cart, removeSneaker, user} = this.props
+    const {user, cart, removeSneaker} = this.props
 
     return (
       <div>
@@ -40,14 +47,15 @@ export class Cart extends React.Component {
             <h3 className="text-center">Your cart is empty</h3>
           </div>
         )}
+        <CartTotal />
       </div>
     )
   }
 }
 
 const mapStateToProps = state => ({
-  cart: state.cart,
-  user: state.user
+  user: state.user,
+  cart: state.cart
 })
 
 const mapDispatchToProps = dispatch => ({
