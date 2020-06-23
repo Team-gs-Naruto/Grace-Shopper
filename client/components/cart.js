@@ -3,7 +3,6 @@ import {removeSneakerThunk, getCartThunk, getQuantityThunk} from '../store/cart'
 import {connect} from 'react-redux'
 import Button from 'react-bootstrap/Button'
 import CartTotal from './cart-total'
-
 export class Cart extends React.Component {
   componentDidMount() {
     this.props.getCart(this.props.user.id || null)
@@ -17,7 +16,6 @@ export class Cart extends React.Component {
 
   render() {
     const {user, cart, removeSneaker} = this.props
-
     return (
       <div>
         {cart.length ? (
@@ -33,11 +31,9 @@ export class Cart extends React.Component {
                     Remove
                   </Button>
                 </div>
-
                 <div>
                   <img src={sneaker.media} />
                 </div>
-
                 <div>
                   <label className="quantity" htmlFor="quantity">
                     Edit Quantity
@@ -59,9 +55,7 @@ export class Cart extends React.Component {
                     <option value="5">5</option>
                   </select>
                 </div>
-
                 <div>{sneaker.title}</div>
-
                 <div>{sneaker.retailPrice}</div>
               </div>
             ))}
