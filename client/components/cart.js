@@ -21,28 +21,30 @@ export class Cart extends React.Component {
     return (
       <div>
         {cart.length ? (
-          cart.map(sneaker => (
-            <div key={sneaker.id}>
-              <div>
-                <Button
-                  type="button"
-                  variant="danger"
-                  onClick={() => removeSneaker(user.id, sneaker.id)}
-                >
-                  Remove
-                </Button>
+          <div>
+            {cart.map(sneaker => (
+              <div key={sneaker.id}>
+                <div>
+                  <Button
+                    type="button"
+                    variant="danger"
+                    onClick={() => removeSneaker(user.id, sneaker.id)}
+                  >
+                    Remove
+                  </Button>
+                </div>
+
+                <div>
+                  <img src={sneaker.media} />
+                </div>
+
+                <div>{sneaker.title}</div>
+
+                <div>{sneaker.retailPrice}</div>
               </div>
-
-              <div>
-                <img src={sneaker.media} />
-              </div>
-
-              <div>{sneaker.title}</div>
-
-              <div>{sneaker.retailPrice}</div>
-              <CartTotal />
-            </div>
-          ))
+            ))}
+            <CartTotal />
+          </div>
         ) : (
           <div>
             <h3 className="text-center">Your cart is empty</h3>

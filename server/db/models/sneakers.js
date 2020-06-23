@@ -26,7 +26,8 @@ const Sneakers = db.define('sneakers', {
   },
   retailPrice: {
     type: Sequelize.INTEGER,
-    allowNull: true
+    allowNull: true,
+    defaultValue: 100
   },
   styleId: {
     type: Sequelize.STRING,
@@ -39,6 +40,12 @@ const Sneakers = db.define('sneakers', {
   year: {
     type: Sequelize.INTEGER,
     allowNull: true
+  }
+})
+
+Sneakers.beforeCreate(function(sneaker) {
+  if (sneaker.retailPrice === 0 || sneaker.retailPrice === null) {
+    sneaker.retailPrice = 100
   }
 })
 
