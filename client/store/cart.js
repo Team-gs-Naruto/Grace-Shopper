@@ -10,7 +10,7 @@ const GET_CART = 'GET_CART'
 const GET_QUANTITY = 'GET_QUANTITY'
 
 // ACTION CREATORS
-const addSneakerToCart = item => ({
+export const addSneakerToCart = item => ({
   type: ADD_SNEAKER_TO_CART,
   item
 })

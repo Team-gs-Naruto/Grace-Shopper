@@ -13,6 +13,7 @@ const notAGuest = (req, res, next) => {
 
 const isAdmin = (req, res, next) => {
   if (!req.user.isAdmin) {
+    console.log('yo')
     return next(errorNotAllowed())
   }
   next()
