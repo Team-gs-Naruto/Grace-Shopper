@@ -19,7 +19,7 @@ module.exports = router
  */
 
 if (process.env.NODE_ENV !== 'production') {
-  require('../../secrets')
+  require('../../new-secrets')
 }
 
 if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {

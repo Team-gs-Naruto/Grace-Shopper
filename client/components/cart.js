@@ -1,33 +1,28 @@
 import React from 'react'
-import {updateQty, removeSneakerThunk, getCartThunk} from '../store/cart'
+import {
+  incrementThunk,
+  decrementThunk,
+  removeSneakerThunk,
+  getCartThunk
+} from '../store/cart'
 import {connect} from 'react-redux'
 import Button from 'react-bootstrap/Button'
 
 export class Cart extends React.Component {
-  constructor() {
-    super()
-    this.increment = this.increment.bind()
-    this.decrement = this.decrement.bind
-  }
   componentDidMount() {
     this.props.getCart(this.props.match.params.userId || null)
-    const id = this.props.match.params.id
   }
-  increment(item, cart) {
-    this.props.updateQty({
-      id: item.id,
-      quantity: item.quantity,
-      userId
-    })
+  handleClick(event, sneaker) {
+    const userId = user.id
+    const sneakerId = sneaker.id
+    const click = event.target.value
+    event.preventDefault()
+    if (click === 'increment') {
+      this.props.incrementThunk(sneakerId, userId)
+    } else if (click === 'decrement') {
+      this.props.decrementThunk(sneakerId, userId)
+    }
   }
-  decrement(item, cart) {
-    this.props.updateQty({
-      id: item.id,
-      quantity: item.quantity,
-      userId
-    })
-  }
-
   render() {
     const {cart, removeSneaker, user} = this.props
 
@@ -53,11 +48,27 @@ export class Cart extends React.Component {
               <div>{sneaker.title}</div>
 
               <div>{sneaker.retailPrice}</div>
-              {sneaker.purchase ? (
-                <div>{sneaker.purchase.quantity}</div>
-              ) : (
-                <div>null</div>
-              )}
+
+              <div>Quantity: {sneaker.purchase.quantity}</div>
+
+              <button
+                type="button"
+                value="decrement"
+                onClick={() => {
+                  this.handleClick(event, sneaker)
+                }}
+              >
+                Decrease Qty
+              </button>
+              <button
+                type="button"
+                value="increment"
+                onClick={() => {
+                  this.handleClick(event, sneaker)
+                }}
+              >
+                Increase Qty
+              </button>
             </div>
           ))
         ) : (

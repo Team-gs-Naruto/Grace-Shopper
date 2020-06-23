@@ -125,21 +125,20 @@ router.delete('/:userId/cart', async (req, res, next) => {
   }
 })
 
-router.put('/:userId/cart', async (req, res, next) => {
+router.put('/:userId/cart/:action', async (req, res, next) => {
   try {
-    const order = await Order.findOne({
-      where: {
-        userId: +req.params.userId,
-        isComplete: false
-      }
-    })
-    const purchase = await Purchase.update({
+    const purchase = await Purchase.findOne({
       where: {
         sneakerId: +req.body.sneakerId,
-        orderId: order.id,
-        quantity: +req.body.quantity
+        orderId: +req.body.orderId
       }
     })
+    if (req.params.action === 'increment') {
+      await purchase.increment('quantity', {by: 1})
+    }
+    if (req.params.action === 'decrement') {
+      await purchase.decrement('quantity', {by: 1})
+    }
     res.json(purchase)
   } catch (err) {
     next(err)

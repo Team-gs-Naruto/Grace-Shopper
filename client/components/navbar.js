@@ -51,9 +51,11 @@ const NavBar = ({handleClick, isLoggedIn, user, isAdmin}) => (
                 </li>
                 &nbsp; &nbsp; &nbsp; &nbsp;
                 {isAdmin && (
-                  <a href="/users" target="_self">
-                    Users
-                  </a>
+                  <li>
+                    <a href="/users" target="_self">
+                      Users
+                    </a>
+                  </li>
                 )}
               </div>
             ) : (
