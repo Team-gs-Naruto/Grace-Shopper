@@ -21,9 +21,9 @@ const ThankYou = () => {
       <Link to="/shop">
         &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
         &nbsp; &nbsp;
-        <a className="waves-effect btn-large grey">
+        <div className="waves-effect btn-large grey">
           <i className="material-icons right">shopping_bag</i>Keep Shopping
-        </a>
+        </div>
       </Link>
       &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
       &nbsp; &nbsp;

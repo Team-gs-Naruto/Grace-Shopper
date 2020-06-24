@@ -58,16 +58,18 @@ export class CheckoutForm extends React.Component {
               </Form.Group>
               &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
               &nbsp; &nbsp; &nbsp;
-              <Link to="/thankyou">
-                <Button
-                  className="grey"
-                  variant="primary"
-                  type="submit"
-                  onClick={() => clearingCart(user.id)}
-                >
-                  Submit
-                </Button>
-              </Link>
+              <div className="center">
+                <Link to="/thankyou">
+                  <Button
+                    className="grey"
+                    variant="primary"
+                    type="submit"
+                    onClick={() => clearingCart(user.id)}
+                  >
+                    Submit
+                  </Button>
+                </Link>
+              </div>
               &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
               &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
             </div>

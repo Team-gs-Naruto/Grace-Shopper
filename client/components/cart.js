@@ -101,12 +101,12 @@ export class Cart extends React.Component {
         <div className="container center ">
           <Link to="/cart/checkout">
             <div className="col offset-m3 s8">
-              <a
+              <button
                 type="button"
                 className="grey waves-effect waves-light btn-large"
               >
                 Checkout
-              </a>
+              </button>
             </div>
           </Link>
         </div>
