@@ -44,9 +44,6 @@ export class SingleSneaker extends React.Component {
                   ${sneaker.retailPrice}
                 </h5>
                 <p className="center grey-text text-darken-2">
-                  Color Way: {sneaker.colorWay}
-                </p>
-                <p className="center grey-text text-darken-2">
                   Brand: {sneaker.brand}
                 </p>
               </div>
