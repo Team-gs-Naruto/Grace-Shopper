@@ -3,33 +3,35 @@ const db = require('../server/db')
 const {User, Sneakers} = require('../server/db/models')
 const Axios = require('axios')
 const chance = require('chance')(123)
-let allSneakers = []
+const seedSneakers = require('../seedSneakers')
+
+// let allSneakers = []
 
 if (process.env.NODE_ENV !== 'production') require('../new-secrets')
 let createdUsers
 let createdSneakers
 let createdAdmin
-
-const getSneakersFromSwagger = async () => {
-  const nikeSneakers = await Axios.get(
-    `http://api.thesneakerdatabase.com/v1/sneakers?limit=34&brand=Nike`
-  )
-  const adidasSneakers = await Axios.get(
-    `http://api.thesneakerdatabase.com/v1/sneakers?limit=33&brand=Adidas`
-  )
-  const pumaSneakers = await Axios.get(
-    `http://api.thesneakerdatabase.com/v1/sneakers?limit=33&brand=Puma`
-  )
-  allSneakers = allSneakers.concat(
-    nikeSneakers.data.results,
-    adidasSneakers.data.results,
-    pumaSneakers.data.results
-  )
-}
+//api is currently down...
+// const getSneakersFromSwagger = async () => {
+//   const nikeSneakers = await Axios.get(
+//     `http://api.thesneakerdatabase.com/v1/sneakers?limit=34&brand=Nike`
+//   )
+//   const adidasSneakers = await Axios.get(
+//     `http://api.thesneakerdatabase.com/v1/sneakers?limit=33&brand=Adidas`
+//   )
+//   const pumaSneakers = await Axios.get(
+//     `http://api.thesneakerdatabase.com/v1/sneakers?limit=33&brand=Puma`
+//   )
+//   allSneakers = allSneakers.concat(
+//     nikeSneakers.data.results,
+//     adidasSneakers.data.results,
+//     pumaSneakers.data.results
+//   )
+// }
 const createSeedData = () => {
   const defaultMedia =
     'https://cdn5.vectorstock.com/i/thumb-large/53/94/running-shoe-sneaker-silhouette-vector-2575394.jpg'
-  return allSneakers.map(sneaker => {
+  return seedSneakers.map(sneaker => {
     return {
       brand: sneaker.brand,
       colorway: sneaker.colorway,
@@ -96,7 +98,7 @@ async function seed() {
 async function runSeed() {
   console.log('seeding...')
   try {
-    await getSneakersFromSwagger()
+    await createSeedData()
     await seed()
   } catch (err) {
     console.error(err)
