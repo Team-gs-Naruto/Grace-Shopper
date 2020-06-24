@@ -18,7 +18,7 @@ const NavBar = ({handleClick, isLoggedIn, isAdmin}) => (
       <nav className="lighten grey 1">
         <div className="nav-wrapper">
           &nbsp; &nbsp; &nbsp; &nbsp;
-          <a href="/homepage" className="brand-logo">
+          <a href="/" className="brand-logo">
             {Img}
           </a>
           <ul className="right hide-on-med-and-down">
@@ -26,7 +26,7 @@ const NavBar = ({handleClick, isLoggedIn, isAdmin}) => (
               <div>
                 {/* The navbar will show these links after you log in */}
                 <li className="tab">
-                  <a href="/homepage" target="_self">
+                  <a href="/" target="_self">
                     Home
                   </a>
                 </li>
@@ -62,7 +62,7 @@ const NavBar = ({handleClick, isLoggedIn, isAdmin}) => (
               <div>
                 {/* The navbar will show these links before you log in */}
                 <li className="tab">
-                  <a href="/homepage" target="_self">
+                  <a href="/" target="_self">
                     Home
                   </a>
                 </li>
