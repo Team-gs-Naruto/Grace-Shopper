@@ -96,10 +96,22 @@ export class Cart extends React.Component {
               <h3 className="text-center">Your cart is empty</h3>
             </div>
           )}
+          &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
         </div>
-        <Link to="/cart/checkout">
-          <button type="button">Checkout</button>
-        </Link>
+        <div className="container center ">
+          <Link to="/cart/checkout">
+            <div className="col offset-m3 s8">
+              <a
+                type="button"
+                className="grey waves-effect waves-light btn-large"
+              >
+                Checkout
+              </a>
+            </div>
+          </Link>
+        </div>
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+        &nbsp; &nbsp;
       </section>
     )
   }
