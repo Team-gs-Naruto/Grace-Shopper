@@ -32,9 +32,8 @@ export const getQuantity = sneaker => ({
   sneaker
 })
 
-export const clearCart = orderId => ({
-  type: CLEAR_CART,
-  orderId
+export const clearCart = () => ({
+  type: CLEAR_CART
 })
 
 // THUNK CREATORS
@@ -154,11 +153,15 @@ export const getQuantityThunk = (userId, sneakerId, quantity) => {
   }
 }
 
-export const clearingCart = orderId => {
+export const clearCartThunk = userId => {
   return async dispatch => {
     try {
-      const {data} = await axios.put(`/api/users/cart`, {orderId: orderId})
-      dispatch(clearCart(data))
+      if (userId) {
+        const {data} = await axios.put(`/api/users/cart`, {userId})
+      } else {
+        localStorage.setItem('cart', JSON.stringify([]))
+      }
+      dispatch(clearCart())
     } catch (err) {
       console.log('ERROR IN GET CLEARING CART THUNK')
     }
@@ -191,7 +194,7 @@ export default function cartReducer(state = initialState, action) {
       })
     }
     case CLEAR_CART:
-      return state
+      return initialState
     default:
       return state
   }

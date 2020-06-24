@@ -1,38 +1,22 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-import {clearingCart} from '../store/cart'
+import {clearCartThunk} from '../store/cart'
 
 export class Form extends React.Component {
-  constructor() {
-    super()
-    this.state = {}
-    this.handleSubmit = this.handleSubmit.bind(this)
-  }
-  componentDidMount() {
-    this.props.clearingCart(this.props.cartItems[0].purchase.orderId)
-  }
-
-  handleSubmit() {
-    if (this.props.isLoggedIn) {
-      this.props.clearingCart(this.props.cartItems[0].purchase.orderId)
-    } else {
-      localStorage.setItem('cart', JSON.stringify([]))
-    }
-  }
   render() {
-    console.log(
-      this.props.clearingCart(this.props.cartItems[0].purchase.orderId)
-    )
+    const {user, clearingCart} = this.props
     return (
       <div>
-        <form onSubmit={this.handleSubmit}>
+        <form>
           <label>Name</label>
           <input required />
           <label>Address</label>
           <input required />
           <Link to="/thankyou">
-            <button type="button">Submit Order</button>
+            <button type="submit" onClick={() => clearingCart(user.id)}>
+              Submit Order
+            </button>
           </Link>
         </form>
       </div>
@@ -43,11 +27,12 @@ export class Form extends React.Component {
 const mapState = state => {
   return {
     isLoggedIn: !!state.user.id,
-    cartItems: state.cart
+    cartItems: state.cart,
+    user: state.user
   }
 }
 const mapDispatch = dispatch => ({
-  clearingCart: orderId => dispatch(clearingCart(orderId))
+  clearingCart: userId => dispatch(clearCartThunk(userId))
 })
 
 export default connect(mapState, mapDispatch)(Form)

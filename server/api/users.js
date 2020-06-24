@@ -64,12 +64,12 @@ router.put('/cart', async (req, res, next) => {
   try {
     const order = await Order.findOne({
       where: {
-        id: +req.body.orderId
+        userId: +req.body.userId,
+        isComplete: false
       }
     })
     order.update({isComplete: true})
-    //res.send('Success')
-    res.json(order)
+    res.sendStatus(200)
   } catch (err) {
     next(err)
   }
