@@ -18,7 +18,7 @@ const ThankYou = () => {
       />
       <h1 className="grey-text center">Thank you for shopping with us!</h1>
       <h2 className="grey-text center">Order #{order}</h2>
-      <Link>
+      <Link to="/shop">
         &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
         &nbsp; &nbsp;
         <a className="waves-effect btn-large grey">
