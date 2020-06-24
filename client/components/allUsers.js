@@ -21,11 +21,19 @@ export class AllUsers extends Component {
         ) : (
           <div>
             <div className="text-center">
-              <h1>All Users</h1>
+              <div className="container center">
+                <h1>All Users</h1>
+              </div>
             </div>
             {users.map(user => (
               <div key={user.id}>
-                <Link to={`/users/${user.id}`}>{user.email}</Link>
+                <div className="container center">
+                  <div className="collection">
+                    <Link to={`/users/${user.id}`}>
+                      <a className="collection-item">{user.email}</a>
+                    </Link>
+                  </div>
+                </div>
               </div>
             ))}
           </div>

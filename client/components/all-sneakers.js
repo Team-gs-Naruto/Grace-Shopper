@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import ShopPageSneaker from './sneaker'
 import {Link} from 'react-router-dom'
 import {fetchSneakers, getBrand} from '../store/all-sneakers'
-import {Container, Row, Col} from 'react-bootstrap'
+import {Container, Row, Col, ButtonGroup, Button} from 'react-bootstrap'
 
 export class AllSneakers extends React.Component {
   componentDidMount() {
@@ -15,29 +15,53 @@ export class AllSneakers extends React.Component {
 
     return (
       <div>
-        <div className="text-center">
-          <h1>All Sneakers</h1>
-        </div>
-        <div>
-          <label className="category" htmlFor="category">
-            Category
-          </label>
-          <select onChange={event => this.props.fetchBrand(event.target.value)}>
-            <option value="">All</option>
-            <option value="Nike">Nike</option>
-            <option value="adidas">Adidas</option>
-            <option value="Puma">Puma</option>
-          </select>
-        </div>
+        <img
+          className="slider"
+          src="https://www.mystylecop.com/includes/templates/yourstore/images/uploads/kobe_1591870884.jpg"
+        />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+        &nbsp; &nbsp;
+        <Container className="center">
+          <ButtonGroup aria-label="Basic example">
+            <Button className="lighten grey 1" variant="secondary" href="/shop">
+              All
+            </Button>
+            <Button
+              className="lighten grey 1"
+              variant="secondary"
+              onClick={event => this.props.fetchBrand('Nike')}
+            >
+              Nike
+            </Button>
+            <Button
+              className="lighten grey 1"
+              variant="secondary"
+              onClick={event => this.props.fetchBrand('adidas')}
+            >
+              Adidas
+            </Button>
+            <Button
+              className="lighten grey 1"
+              variant="secondary"
+              onClick={event => this.props.fetchBrand('Puma')}
+            >
+              Puma
+            </Button>
+          </ButtonGroup>
+        </Container>
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+        &nbsp; &nbsp;
         <Container>
-          <Row>
+          <Row className="justify-content-md-center">
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+            &nbsp; &nbsp; &nbsp;
             {sneakers.map(sneaker => (
               <div key={sneaker.id}>
-                <Col>
+                <div className="col s3 m3">
                   <Link to={`/shop/${sneaker.id}`}>
                     <ShopPageSneaker sneaker={sneaker} />
                   </Link>
-                </Col>
+                </div>
               </div>
             ))}
           </Row>

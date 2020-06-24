@@ -18,24 +18,38 @@ export class SingleSneaker extends React.Component {
 
     return (
       <div>
-        <h1>{sneaker.title}</h1>
-        <img src={sneaker.imageUrl} />
-        <div>${sneaker.retailPrice}</div>
+        <span className="card">
+          <h1 className="center grey-text text-darken-2">{sneaker.title}</h1>
+        </span>
 
-        <h3>DESCRIPTION</h3>
-        <div>Brand: {sneaker.brand}</div>
-        <div>Color Way: {sneaker.colorWay}</div>
-        <div>Release Date: {sneaker.releaseDate}</div>
-        <div>Style ID: {sneaker.styleId}</div>
-
-        <button
-          type="button"
-          onClick={() => {
-            this.handleClick(sneaker)
-          }}
-        >
-          Add to Cart
-        </button>
+        <div className="row">
+          <div className="col s6 offset-s3">
+            <div className="card">
+              <div className="card-image">
+                <img src={sneaker.imageUrl} />
+                <a className="btn-floating halfway-fab waves-effect waves-light red">
+                  <i
+                    className="material-icons"
+                    type="button"
+                    onClick={() => {
+                      this.handleClick(sneaker)
+                    }}
+                  >
+                    add
+                  </i>
+                </a>
+              </div>
+              <div className="card-content">
+                <h5 className="center grey-text text-darken-2">
+                  ${sneaker.retailPrice}
+                </h5>
+                <p className="center grey-text text-darken-2">
+                  Brand: {sneaker.brand}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     )
   }

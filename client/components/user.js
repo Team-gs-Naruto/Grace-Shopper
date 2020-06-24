@@ -14,22 +14,40 @@ export class User extends Component {
   render() {
     const {user} = this.props
     return (
-      <div>
-        <Card style={{width: '18rem'}}>
-          <Link to={`/users/${user.id}`}>
-            <p>{user.email}</p>
-          </Link>
+      <div className="container center">
+        <div className="row">
+          <div className="col offset-m1">
+            <div className="card">
+              <div className="card-image">
+                <img src=" https://genslerzudansdentistry.com/wp-content/uploads/2015/11/anonymous-user.png" />
 
-          {user.isAdmin ? (
-            <button type="button" onClick={() => this.removeAdmin(user.id)}>
-              Remove Admin
-            </button>
-          ) : (
-            <button type="button" onClick={() => this.makeAdmin(user.id)}>
-              Make Admin
-            </button>
-          )}
-        </Card>
+                <Link to={`/users/${user.id}`}>
+                  <p>{user.email}</p>
+                </Link>
+
+                {user.isAdmin ? (
+                  <a
+                    className="waves-effect waves-light btn grey"
+                    type="button"
+                    onClick={() => this.removeAdmin(user.id)}
+                  >
+                    {' '}
+                    Remove Admin
+                  </a>
+                ) : (
+                  <a
+                    className="waves-effect waves-light btn grey"
+                    type="button"
+                    onClick={() => this.makeAdmin(user.id)}
+                  >
+                    {' '}
+                    Make Admin
+                  </a>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     )
   }
