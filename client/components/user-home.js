@@ -9,8 +9,9 @@ export const UserHome = props => {
   const {email} = props
 
   return (
-    <div>
+    <div className="container center grey-text">
       <h3>Welcome, {email}</h3>
+      <img src="https://media.giphy.com/media/2yrpMem1N76rMkx5Vd/giphy.gif" />
     </div>
   )
 }

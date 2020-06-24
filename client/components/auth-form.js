@@ -30,9 +30,8 @@ const AuthForm = props => {
               </div>
               <div className="row">
                 <div className="col m12">
-                  <a className="waves-effect waves-light btn-large social google">
-                    <i className="fa fa-google" href="/auth/google" />{' '}
-                    {displayName} with google
+                  <a className="left-align" href="/auth/google">
+                    {displayName} with Google
                   </a>
                   <p className="center">
                     <button
