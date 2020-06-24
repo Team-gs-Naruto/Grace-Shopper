@@ -53,6 +53,7 @@
     "jquery": "^3.5.1",
     "material-design-icons": "^3.0.1",
     "materialize-css": "^1.0.0-rc.2",
+    "materialize-social": "^1.0.3",
     "morgan": "^1.9.1",
     "passport": "^0.4.0",
     "passport-google-oauth": "^2.0.0",

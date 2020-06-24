@@ -10,8 +10,10 @@ const AuthForm = props => {
   return (
     <div className="container">
       <div className="row center">
-        <div className="col offset-m3 m6">
-          <h2 className="center-align">{displayName}</h2>
+        <div className="col offset-m1 m10">
+          <h2 className="center-align grey-text text-darken-3">
+            {displayName}
+          </h2>
           <div className="row">
             <form className="col s12" onSubmit={handleSubmit} name={name}>
               <div className="row">
@@ -28,8 +30,9 @@ const AuthForm = props => {
               </div>
               <div className="row">
                 <div className="col m12">
-                  <a className="left-align" href="/auth/google">
-                    {displayName} with Google
+                  <a className="waves-effect waves-light btn-large social google">
+                    <i className="fa fa-google" href="/auth/google" />{' '}
+                    {displayName} with google
                   </a>
                   <p className="center">
                     <button

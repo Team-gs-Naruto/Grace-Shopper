@@ -16,7 +16,7 @@ router.get('/', async (req, res, next) => {
 router.get('/preview', async (req, res, next) => {
   try {
     const sneakers = await Sneakers.findAll()
-    const arr = sneakers.slice(42, 48)
+    const arr = sneakers.slice(78, 86)
     res.json(arr)
   } catch (err) {
     next(err)

@@ -18,12 +18,12 @@ export class SingleSneaker extends React.Component {
 
     return (
       <div>
-        <span className="center">
-          <h1>{sneaker.title}</h1>
+        <span className="card horizontal">
+          <h1 className="center grey-text text-darken-2">{sneaker.title}</h1>
         </span>
 
         <div className="row">
-          <div className="col s12 m6">
+          <div className="col s6 offset-s3">
             <div className="card">
               <div className="card-image">
                 <img src={sneaker.imageUrl} />
@@ -40,9 +40,15 @@ export class SingleSneaker extends React.Component {
                 </a>
               </div>
               <div className="card-content">
-                <h5>${sneaker.retailPrice}</h5>
-                <p>Color Way: {sneaker.colorWay}</p>
-                <p>Brand: {sneaker.brand}</p>
+                <h5 className="center grey-text text-darken-2">
+                  ${sneaker.retailPrice}
+                </h5>
+                <p className="center grey-text text-darken-2">
+                  Color Way: {sneaker.colorWay}
+                </p>
+                <p className="center grey-text text-darken-2">
+                  Brand: {sneaker.brand}
+                </p>
               </div>
             </div>
           </div>

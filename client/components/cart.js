@@ -18,50 +18,67 @@ export class Cart extends React.Component {
   render() {
     const {user, cart, removeSneaker} = this.props
     return (
-      <div>
-        <Container xs={1}>
+      <section className="products">
+        <div>
           {cart.length ? (
             <div>
               {cart.map(sneaker => (
                 <div key={sneaker.id}>
                   <div />
+
                   <div>
-                    <img src={sneaker.media} />
+                    <div className="container m3">
+                      <button
+                        className="btn-floating waves-effect waves-light red left "
+                        type="button"
+                        onClick={() => removeSneaker(user.id, sneaker.id)}
+                      >
+                        <i className="material-icons">remove</i>
+                      </button>
+                    </div>
+                    <div className="row">
+                      <div className="col offset-m1 s8">
+                        <div className="card horizontal">
+                          <div className="card-image">
+                            <img src={sneaker.media} />
+                          </div>
+                          <div>
+                            <label htmlFor="quantity" className="center">
+                              Edit Quantity
+                            </label>
+                            <select
+                              className="browser-default"
+                              value={sneaker.purchase.quantity}
+                              onChange={event =>
+                                this.props.getQuantity(
+                                  user.id,
+                                  sneaker.id,
+                                  event.target.value
+                                )
+                              }
+                            >
+                              <option className="center-text" value="1">
+                                1
+                              </option>
+                              <option value="2">2</option>
+                              <option value="3">3</option>
+                              <option value="4">4</option>
+                              <option value="5">5</option>
+                            </select>
+                          </div>
+                          <div className="col s12 l6 left">
+                            <h6>{sneaker.title}</h6>
+                          </div>
+                          <h5 className="col s12 l1 right black-text">
+                            ${sneaker.retailPrice}
+                          </h5>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                  <div>
-                    <label htmlFor="quantity" className="center">
-                      Edit Quantity
-                    </label>
-                    <select
-                      className="browser-default"
-                      value={sneaker.purchase.quantity}
-                      onChange={event =>
-                        this.props.getQuantity(
-                          user.id,
-                          sneaker.id,
-                          event.target.value
-                        )
-                      }
-                    >
-                      <option value="1">1</option>
-                      <option value="2">2</option>
-                      <option value="3">3</option>
-                      <option value="4">4</option>
-                      <option value="5">5</option>
-                    </select>
-                  </div>
-                  <div>{sneaker.title}</div>
-                  <div>{sneaker.retailPrice}</div>
-                  <Button
-                    className="center"
-                    type="button"
-                    variant="danger"
-                    onClick={() => removeSneaker(user.id, sneaker.id)}
-                  >
-                    Remove
-                  </Button>
                 </div>
               ))}
+
               <div className="col s12 l3 center">
                 <div className="card">
                   <div className="card-content">
@@ -78,8 +95,8 @@ export class Cart extends React.Component {
               <h3 className="text-center">Your cart is empty</h3>
             </div>
           )}
-        </Container>
-      </div>
+        </div>
+      </section>
     )
   }
 }

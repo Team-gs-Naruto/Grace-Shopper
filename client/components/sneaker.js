@@ -8,11 +8,15 @@ const ShopPageSneaker = props => {
         <img src={sneaker.media} />
       </div>
       <div className="card-content">
-        <p className="card-text center black-text">{sneaker.title}</p>
+        <p className="card-text center grey-text text-darken-3">
+          {sneaker.title}
+        </p>
         {Number(sneaker.retailPrice) ? (
-          <h6 className="center black-text">${sneaker.retailPrice}</h6>
+          <h6 className="center grey-text text-darken-3">
+            ${sneaker.retailPrice}
+          </h6>
         ) : (
-          <h6 className="center black-text">Sold Out</h6>
+          <h6 className="center grey-text text-darken-3">Sold Out</h6>
         )}
       </div>
     </div>
