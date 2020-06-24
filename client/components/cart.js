@@ -5,12 +5,10 @@ import {Button, Container} from 'react-bootstrap'
 import CartTotal from './cart-total'
 import M from 'materialize-css'
 import {Link} from 'react-router-dom'
-
 export class Cart extends React.Component {
   componentDidMount() {
     this.props.getCart(this.props.user.id || null)
   }
-
   componentDidUpdate(prevState) {
     if (prevState.user.id !== this.props.user.id) {
       this.props.getCart(this.props.user.id || null)
@@ -26,7 +24,6 @@ export class Cart extends React.Component {
               {cart.map(sneaker => (
                 <div key={sneaker.id}>
                   <div />
-
                   <div>
                     <div className="container m3">
                       <button
@@ -79,7 +76,6 @@ export class Cart extends React.Component {
                   </div>
                 </div>
               ))}
-
               <div className="col s12 l3 center">
                 <div className="card">
                   <div className="card-content">
@@ -90,6 +86,18 @@ export class Cart extends React.Component {
                   </div>
                 </div>
               </div>
+              <div className="container center ">
+                <Link to="/cart/checkout">
+                  <div className="col offset-m3 s8">
+                    <button
+                      type="button"
+                      className="grey waves-effect waves-light btn-large"
+                    >
+                      Checkout
+                    </button>
+                  </div>
+                </Link>
+              </div>
             </div>
           ) : (
             <div className="container center">
@@ -98,30 +106,16 @@ export class Cart extends React.Component {
           )}
           &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
         </div>
-        <div className="container center ">
-          <Link to="/cart/checkout">
-            <div className="col offset-m3 s8">
-              <button
-                type="button"
-                className="grey waves-effect waves-light btn-large"
-              >
-                Checkout
-              </button>
-            </div>
-          </Link>
-        </div>
         &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
         &nbsp; &nbsp;
       </section>
     )
   }
 }
-
 const mapStateToProps = state => ({
   user: state.user,
   cart: state.cart
 })
-
 const mapDispatchToProps = dispatch => ({
   removeSneaker: (userId, sneakerId) =>
     dispatch(removeSneakerThunk(userId, sneakerId)),
@@ -129,5 +123,4 @@ const mapDispatchToProps = dispatch => ({
   getQuantity: (userId, sneakerId, quantity) =>
     dispatch(getQuantityThunk(userId, sneakerId, quantity))
 })
-
 export default connect(mapStateToProps, mapDispatchToProps)(Cart)

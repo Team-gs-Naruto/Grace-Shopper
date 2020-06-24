@@ -5,8 +5,13 @@ import {clearCartThunk} from '../store/cart'
 import {Form, Button, Col, Container} from 'react-bootstrap'
 
 export class CheckoutForm extends React.Component {
+  constructor(props) {
+    super(props)
+    state = {}
+  }
   render() {
     const {user, clearingCart} = this.props
+
     return (
       <div className="container">
         <Container>
@@ -14,23 +19,34 @@ export class CheckoutForm extends React.Component {
             <Form.Row>
               <Form.Group as={Col} controlId="formGridEmail">
                 <Form.Label>Email</Form.Label>
-                <Form.Control type="email" placeholder="Enter email" />
+                <Form.Control
+                  required="true"
+                  type="email"
+                  placeholder="Enter email"
+                />
               </Form.Group>
 
               <Form.Group as={Col} controlId="formGridPassword">
                 <Form.Label>Additional Comments</Form.Label>
-                <Form.Control type="text" placeholder="Additional comments" />
+                <Form.Control
+                  required="true"
+                  type="text"
+                  placeholder="Additional comments"
+                />
               </Form.Group>
             </Form.Row>
 
             <Form.Group controlId="formGridAddress1">
               <Form.Label>Address</Form.Label>
-              <Form.Control placeholder="1234 Main St" />
+              <Form.Control ref required="true" placeholder="1234 Main St" />
             </Form.Group>
 
             <Form.Group controlId="formGridAddress2">
               <Form.Label>Address 2</Form.Label>
-              <Form.Control placeholder="Apartment, studio, or floor" />
+              <Form.Control
+                required="true"
+                placeholder="Apartment, studio, or floor"
+              />
             </Form.Group>
 
             <Form.Row>
@@ -41,7 +57,11 @@ export class CheckoutForm extends React.Component {
 
               <Form.Group as={Col} controlId="formGridState">
                 <Form.Label>State</Form.Label>
-                <Form.Control as="select" defaultValue="Choose...">
+                <Form.Control
+                  required="true"
+                  as="select"
+                  defaultValue="Choose..."
+                >
                   <option>Choose...</option>
                   <option>...</option>
                 </Form.Control>
