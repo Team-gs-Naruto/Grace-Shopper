@@ -33,12 +33,8 @@ const createSeedData = () => {
     return {
       brand: sneaker.brand,
       colorway: sneaker.colorway,
-      media: sneaker.media.thumbUrl.length
-        ? sneaker.media.thumbUrl
-        : defaultMedia,
-      imageUrl: sneaker.media.smallImageUrl.length
-        ? sneaker.media.smallImageUrl
-        : defaultMedia,
+      media: sneaker.media ? sneaker.media.thumbUrl : defaultMedia,
+      imageUrl: sneaker.media ? sneaker.media.smallImageUrl : defaultMedia,
       releaseDate: sneaker.releaseDate,
       retailPrice: sneaker.retailPrice,
       styleId: sneaker.styleId,
