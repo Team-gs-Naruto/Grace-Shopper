@@ -3,7 +3,7 @@
 Soham Dutta, Alex Bangiyev, Charlies Pan, Chislaine Cruz
 
 Come shop at out sneaker e-commerce store! We have the latest styles available, so come get them while they're still in-stock.
-sneakershopper.herokuapp.com/shop
+sneakershopper.herokuapp.com/
 
 ### Set up
 
