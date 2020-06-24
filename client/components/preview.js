@@ -15,6 +15,7 @@ export class Preview extends React.Component {
 
     return (
       <div>
+        <h2 className="center grey-text">On Sale</h2>
         <Container>
           <Row className="justify-content-md-center">
             {sneakers.map(sneaker => (

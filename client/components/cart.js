@@ -4,6 +4,7 @@ import {connect} from 'react-redux'
 import {Button, Container} from 'react-bootstrap'
 import CartTotal from './cart-total'
 import M from 'materialize-css'
+import {Link} from 'react-router-dom'
 
 export class Cart extends React.Component {
   componentDidMount() {
@@ -96,6 +97,9 @@ export class Cart extends React.Component {
             </div>
           )}
         </div>
+        <Link to="/cart/checkout">
+          <button type="button">Checkout</button>
+        </Link>
       </section>
     )
   }

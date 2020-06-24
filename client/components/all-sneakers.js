@@ -15,6 +15,12 @@ export class AllSneakers extends React.Component {
 
     return (
       <div>
+        <img
+          className="slider"
+          src="https://www.mystylecop.com/includes/templates/yourstore/images/uploads/kobe_1591870884.jpg"
+        />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+        &nbsp; &nbsp;
         <Container className="center">
           <ButtonGroup aria-label="Basic example">
             <Button className="lighten grey 1" variant="secondary" href="/shop">

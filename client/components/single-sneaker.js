@@ -18,7 +18,7 @@ export class SingleSneaker extends React.Component {
 
     return (
       <div>
-        <span className="card horizontal">
+        <span className="card">
           <h1 className="center grey-text text-darken-2">{sneaker.title}</h1>
         </span>
 
