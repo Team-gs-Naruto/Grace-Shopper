@@ -60,6 +60,21 @@ router.get(
   }
 )
 
+router.put('/cart', async (req, res, next) => {
+  try {
+    const order = await Order.findOne({
+      where: {
+        userId: +req.body.userId,
+        isComplete: false
+      }
+    })
+    order.update({isComplete: true})
+    res.sendStatus(200)
+  } catch (err) {
+    next(err)
+  }
+})
+
 router.put(
   '/:id',
 
