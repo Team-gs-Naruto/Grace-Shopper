@@ -5,13 +5,8 @@ import {clearCartThunk} from '../store/cart'
 import {Form, Button, Col, Container} from 'react-bootstrap'
 
 export class CheckoutForm extends React.Component {
-  constructor(props) {
-    super(props)
-    state = {}
-  }
   render() {
     const {user, clearingCart} = this.props
-
     return (
       <div className="container">
         <Container>
@@ -38,7 +33,7 @@ export class CheckoutForm extends React.Component {
 
             <Form.Group controlId="formGridAddress1">
               <Form.Label>Address</Form.Label>
-              <Form.Control ref required="true" placeholder="1234 Main St" />
+              <Form.Control required="true" placeholder="1234 Main St" />
             </Form.Group>
 
             <Form.Group controlId="formGridAddress2">
@@ -57,11 +52,7 @@ export class CheckoutForm extends React.Component {
 
               <Form.Group as={Col} controlId="formGridState">
                 <Form.Label>State</Form.Label>
-                <Form.Control
-                  required="true"
-                  as="select"
-                  defaultValue="Choose..."
-                >
+                <Form.Control as="select" defaultValue="Choose...">
                   <option>Choose...</option>
                   <option>...</option>
                 </Form.Control>
